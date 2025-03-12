@@ -1,7 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using PersonalWebsite.Models;
+using Microsoft.AspNetCore.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<AppIdentityDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration["ConnectionStrings:IdentityConnection"]));
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<AppIdentityDbContext>();
 
 var app = builder.Build();
 
@@ -18,8 +28,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+IdentitySeedData.EnsurePopulated(app);
 
 app.Run();
