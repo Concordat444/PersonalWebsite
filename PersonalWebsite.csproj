@@ -20,4 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Demos\Life\" />
+  </ItemGroup>
+
 </Project>

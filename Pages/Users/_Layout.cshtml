@@ -6,12 +6,14 @@
     <title>Identity</title>
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
+<body onload="registerHandlers(document.querySelectorAll('.user'))">
     <div class="m-2">
         <h5 class="bg-info text-white text-center p-2">
             User Administration
         </h5>
         @RenderBody()
     </div>
+    
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

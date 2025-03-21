@@ -10,7 +10,7 @@
     {
         foreach(IdentityUser user in Model.Users)
         {
-            <tr>
+            <tr class="user">
                 <td>@user.Id</td>
                 <td>@user.UserName</td>
                 <td>@user.Email</td>
@@ -29,3 +29,26 @@
         }
     }
 </table>
+
+@section Scripts
+{
+    <script>
+        function handleMouseover(target)
+        {
+            target.classList.add("bg-secondary");
+        }
+        function handleMouseout(target)
+        {
+            target.classList.remove("bg-secondary");
+        }
+
+        function registerHandlers(elements)
+        {
+            elements.forEach(element => 
+            {
+                element.addEventListener("mouseover", () => handleMouseover(element));
+                element.addEventListener("mouseout", () => handleMouseout(element));
+            });
+        }
+    </script>
+}
