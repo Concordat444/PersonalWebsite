@@ -7,6 +7,7 @@
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body onload="registerHandlers(document.querySelectorAll('.user'))">
+    <partial name="_HeaderPartial" />
     <div class="m-2">
         <h5 class="bg-info text-white text-center p-2">
             User Administration
@@ -14,6 +15,6 @@
         @RenderBody()
     </div>
     
-    @RenderSection("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
