@@ -7,11 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddDbContext<AppIdentityDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration["ConnectionStrings:IdentityConnection"]));
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<AppIdentityDbContext>();
 
 builder.Services.AddServerSideBlazor();
 
@@ -35,7 +30,5 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapBlazorHub();
-
-IdentitySeedData.EnsurePopulated(app);
 
 app.Run();
