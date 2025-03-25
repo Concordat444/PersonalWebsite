@@ -12,24 +12,30 @@
     <input @bind-value="colCount" @bind-value:event="oninput" disabled="@sizeNotEditable" />
 </div>
 <div class="row m-1">
-    <btn class="btn btn-primary col-1 m-1" @onclick="createGrid">Create Grid</btn>
-    <btn class="btn btn-primary col-1 m-1" @onclick="resizeGrid">Resize Grid</btn>
-    <btn class="btn btn-primary col-1 m-1" @onclick="startSimulation" inert="@started">Start Game</btn>
-    <btn class="btn btn-primary col-1 m-1" @onclick="stopSimulation" inert="@(!started)">Stop Game</btn>
-    <btn class="btn btn-primary col-1 m-1" @onclick="onStep">Step Once</btn>
-    <btn class="btn btn-primary col-1 m-1" @onclick="executeChanges">Undo Once</btn>
+    <btn class="btn btn-primary btn-sm col-1 m-1" @onclick="createGrid">Create Grid</btn>
+    <btn class="btn btn-primary btn-sm col-1 m-1" @onclick="resizeGrid">Resize Grid</btn>
+
 </div>
 @if (rows != null)
 {
-    <div class="m-1">
-        @foreach (List<GridModel> row in rows)
+    <div>
+        <div class="m-1">
+            @foreach (List<GridModel> row in rows)
+            {
+                <div class="row m-0">
+                    @foreach (GridModel square in row)
+                    {
+                        <div class="cell" style=@square.Style @onclick="@(() => toggleActive(square))"></div>
+                    }
+                </div>
+            }
+        </div>
+        @if(rows.Count > 0 && rows[0].Count > 0)
         {
-            <div class="row m-0">
-                @foreach (GridModel square in row)
-                {
-                    <div class="cell" style=@square.Style @onclick="@(() => toggleActive(square))"></div>
-                }
-            </div>
+            <btn class="btn btn-primary btn-sm col-1 m-1" @onclick="startSimulation" inert="@started">Start Game</btn>
+            <btn class="btn btn-primary btn-sm col-1 m-1" @onclick="stopSimulation" inert="@(!started)">Stop Game</btn>
+            <btn class="btn btn-primary btn-sm col-1 m-1" @onclick="onStep">Step Once</btn>
+            <btn class="btn btn-primary btn-sm col-1 m-1" @onclick="executeChanges">Undo Once</btn>
         }
     </div>
 }
@@ -39,8 +45,8 @@
     public HashSet<GridModel>? activeCells { get; set; }
     public HashSet<GridModel>? toChange { get; set; }
 
-    public int rowCount { get; set; } = 0;
-    public int colCount { get; set; } = 0;
+    public int rowCount { get; set; } = 40;
+    public int colCount { get; set; } = 100;
     public bool sizeNotEditable = false;
     public bool started { get; set; } = false;
 
