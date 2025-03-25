@@ -91,6 +91,10 @@
     }
     void resizeGrid()
     {
+        if(started)
+        {
+            stopSimulation();
+        }
         sizeNotEditable = false;
         rows?.Clear();
     }

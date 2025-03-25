@@ -21,10 +21,10 @@
             switch (Active)
             {
                 case true:
-                    Style = "height: 20px; width: 20px; background-color: yellow;";
+                    Style = "height: 1em; width: 1em; padding-left: 0px; background-color: yellow;";
                     break;
                 case false:
-                    Style = "height: 20px; width: 20px; background-color: gray;";
+                    Style = "height: 1em; width: 1em; padding-left: 0px; background-color: gray;";
                     break;
             }
         }
