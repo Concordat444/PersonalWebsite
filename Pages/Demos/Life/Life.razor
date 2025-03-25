@@ -74,6 +74,11 @@
     }
     void createGrid()
     {
+        if(started)
+        {
+            stopSimulation();
+        }
+
         sizeNotEditable = true;
         activeCells = new(rowCount * colCount);
         toChange = new(rowCount * colCount);
