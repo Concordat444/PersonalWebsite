@@ -32,8 +32,8 @@
         </div>
         @if(rows.Count > 0 && rows[0].Count > 0)
         {
-            <btn class="btn btn-primary btn-sm col-1 m-1" @onclick="startSimulation" inert="@started">Start Game</btn>
-            <btn class="btn btn-primary btn-sm col-1 m-1" @onclick="stopSimulation" inert="@(!started)">Stop Game</btn>
+            <btn class="btn btn-sm col-1 m-1 @(started ? "btn-secondary" : "btn-primary")" @onclick="startSimulation" inert="@started">Start Game</btn>
+            <btn class="btn btn-sm col-1 m-1 @(!started ? "btn-secondary" : "btn-primary")" @onclick="stopSimulation" inert="@(!started)">Stop Game</btn>
             <btn class="btn btn-primary btn-sm col-1 m-1" @onclick="onStep">Step Once</btn>
             <btn class="btn btn-primary btn-sm col-1 m-1" @onclick="executeChanges">Undo Once</btn>
         }
@@ -54,6 +54,7 @@
 
     private void startSimulation()
     {
+        started = true;
         onStep();
         timer = new System.Timers.Timer(2000);
         timer.Enabled = true;
@@ -63,7 +64,6 @@
     }
     private void OnTimedEvent(Object source, ElapsedEventArgs e)
     {
-        started = true;
         onStep();
         InvokeAsync(() =>
         {

@@ -1,0 +1,175 @@
+﻿@page "/Demos/Challenge1"
+@model PersonalWebsite.Pages.Demos.ParseSymbolsFromWeb.CompanyChallenge1Model
+@{
+    ViewData["Title"] = "Challenge 1";
+}
+<h1>Coding Challenge</h1>
+<div>
+    <h2>The challenge:</h2>
+    <p>
+        I was challenged to prepare a function in either JavaScript (I used JavaScript) or Python that would accept a URL as an argument and construct
+        an image from the data found at the URL. The data was stored on a google docs page and consisted of a table with three
+        columns that defined an x-coordinate, a y-coordinate, and a unicode symbol to insert at the specified position such that,
+        when inserted into a grid, with any unspecified coordinate holding a blank " " character, a string of text would be revealed.
+        The code below, when run in VSCode or from the console of the target webpage (security features prevent the fetch from succeeding
+        if using the console from a different webpage), yields the text at the bottom.
+    </p>
+</div>
+<div>
+    <h2>Process and Reasoning:</h2>
+    <ul>
+        <li>Use the <code>fetch()</code> api to fetch the website's HTML and store it.</li>
+        <li>
+            Use regular expression (regex) matching to parse the saved HTML for the x and y coordinates and the unicode character
+            <ul>
+                To determine what regex to use, I inspected the HTML and saw that the data I needed were all located within
+                similarly formatted 'span' elements
+            </ul>
+        </li>
+        <li>
+            The <code>match()</code> function returns an array of all matching substrings which are then sorted into separate
+            arrays for x-coordinates, y-coordinates, and unicode characters
+            <ul>
+                Since each row of data is structured the same, it was possible to use the modulus(%) operator to sort the array because the
+                x-coordinates would always have a %3 of 0, the unicode characters of 1, and the y-coordinates of 2.
+            </ul>
+        </li>
+        <li>
+            During the sorting, the highest position value of x and y were tracked, and those values are used to determine how large the character
+            grid needs to be. The grid is created and populated with " " characters that will, where necessary, be overwritten by unicode characters
+        </li>
+        <li>
+            The array of unicode characters is iterated through, with the coordinates taken from the x and y coordinate arrays indicating where
+            each character should be inserted.
+            <ul>
+                <strong>Of Note:</strong> The coordinates start in the upper left of the image, with (0,0) being the top left corner, so
+                increasing the y-coordinate value actually amounts to moving lower down in the image. To properly orient the output, the
+                specified y position had to be subtracted from the overall height to find the appropriate coordinate.
+            </ul>
+        </li>
+        <li>
+            The grid array is then iterated through, with each line being joined into a single string which is then logged. This yields the image
+            shown below.
+        </li>
+    </ul>
+</div>
+<br />
+<button class="btn btn-sm btn-primary" onclick="toggleVisibleById('#code')">Show/Hide Code</button>
+<div id="code">
+    <pre><code>
+async function main(url)
+{
+    async function getHtml(url) {
+        try {
+            const response = await fetch(url, {mode: "no-cors"});
+            if(!response.ok)
+            {
+            throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const html = await response.text();      
+            return html;
+        } catch (error) 
+        {
+            console.error("Error fetching webpage:", error);
+        }
+    }
+    function parseForData(html)
+    {
+        const searchPattern = /(?<=&lt;span.*?&gt;)(\d{1,}|\D{1})(?=&lt;\/span&gt;)/g;
+        const tableEntries = html.match(searchPattern);
+        return tableEntries;
+    }
+    function separateData(entries)
+    {
+        let xPos = [];
+        let yPos = [];
+        let char = [];
+        entries.forEach((element, index) => 
+        {
+            switch (index % 3) {
+                case 0:
+                    let x = parseInt(element);
+                    if(x > xMax)
+                    {
+                        xMax = x;
+                    }
+                    xPos.push(x);
+                    break;
+                case 1:
+                    char.push(element);
+                    break;
+                case 2:
+                    let y = parseInt(element);
+                    if(y > yMax)
+                    {
+                        yMax = y;
+                    }
+                    yPos.push(y);
+                    break;
+            }        
+        });
+        return [xPos, char, yPos];
+    }
+    function generateGrid(rows, cols)
+    {
+        let grid = new Array(rows);
+        for(let i = 0; i < grid.length; i++)
+        {
+            grid[i] =  new Array(cols).fill(' ');
+        }
+        return grid;
+    }
+    function populateGrid()
+    {
+        characters.forEach((character, index) => 
+        {
+            let xCoord = xCoords[index];
+            let yCoord = (grid.length - 1) - yCoords[index];
+            grid[yCoord][xCoord] = character;
+        });
+    }
+    let xMax = 0;
+    let yMax = 0;
+    let xCoords = [];
+    let yCoords = [];
+    let characters = []; 
+
+    const html = await getHtml(url);
+
+
+    const tableEntries = parseForData(html);
+
+    [xCoords, characters, yCoords] = separateData(tableEntries);
+    let grid = generateGrid(yMax + 1, xMax + 1);
+    populateGrid();
+    grid.forEach(row =>
+    {
+        console.log(row.join(""));
+    });
+}
+main("https://docs.google.com/document/d/e/2PACX-1vT9MrgdV4LzgNel3QGUkQluBDUVW4uvfj0YgY5fvjefuywLENR7tQzelv7F7Zki5UOK_ZWilat74X5g/pub");
+</code></pre>
+</div>
+<br />
+<button class="btn btn-sm btn-primary" onclick="toggleVisibleById('#output')">Show/Hide Output</button>
+
+<div id="output" class="bg-white">
+    <pre>
+████████░     ████████░   ██████████░    ███████░  ██░           ███░ ███░    ███░ ██░     ██░
+██░     ██░ ███░     ███░ ██░          ███░    ██░ ███░   ███░   ██░    ██░  ██░   ██░     ██░
+██░     ██░ ██░       ██░ ██░         ███░          ██░  █████░ ███░     ██░██░    ██░     ██░
+████████░   ██░       ██░ ████████░   ██░           ███░ ██░██░ ██░       ███░     ██████████░
+██░     ██░ ██░       ██░ ██░         ███░           ██░██░ ██░██░       ██░██░    ██░     ██░
+██░     ██░ ███░     ███░ ██░          ███░    ██░   ████░   ████░      ██░  ██░   ██░     ██░
+████████░     ████████░   ██████████░    ███████░     ██░     ██░     ███░    ███░ ██░     ██░
+</pre>
+</div>
+
+@section Scripts {
+    <script>
+        function toggleVisibleById(target)
+        {
+        document.querySelector(`${target}`).toggleAttribute('hidden');
+        }
+    </script>
+}
