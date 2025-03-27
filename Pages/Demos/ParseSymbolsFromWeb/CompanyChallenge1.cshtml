@@ -2,9 +2,11 @@
 @model PersonalWebsite.Pages.Demos.ParseSymbolsFromWeb.CompanyChallenge1Model
 @{
     ViewData["Title"] = "Challenge 1";
+    ViewData["Demo"] = "Challenge 1";
+
 }
 <h1>Coding Challenge</h1>
-<div>
+<section id="Overview-sec">
     <h2>The challenge:</h2>
     <p>
         I was challenged to prepare a function in either JavaScript (I used JavaScript) or Python that would accept a URL as an argument and construct
@@ -14,11 +16,11 @@
         The code below, when run in VSCode or from the console of the target webpage (security features prevent the fetch from succeeding
         if using the console from a different webpage), yields the text at the bottom.
     </p>
-</div>
-<div>
+</section>
+<section id="Process-sec">
     <h2>Process and Reasoning:</h2>
     <ul>
-        <li>Use the <code>fetch()</code> api to fetch the website's HTML and store it.</li>
+        <li>Use the <code>fetch()</code> api to fetch the website's HTML and store it</li>
         <li>
             Use regular expression (regex) matching to parse the saved HTML for the x and y coordinates and the unicode character
             <ul>
@@ -31,7 +33,7 @@
             arrays for x-coordinates, y-coordinates, and unicode characters
             <ul>
                 Since each row of data is structured the same, it was possible to use the modulus(%) operator to sort the array because the
-                x-coordinates would always have a %3 of 0, the unicode characters of 1, and the y-coordinates of 2.
+                x-coordinates would always have a %3 of 0, the unicode characters of 1, and the y-coordinates of 2
             </ul>
         </li>
         <li>
@@ -40,19 +42,19 @@
         </li>
         <li>
             The array of unicode characters is iterated through, with the coordinates taken from the x and y coordinate arrays indicating where
-            each character should be inserted.
+            each character should be inserted
             <ul>
                 <strong>Of Note:</strong> The coordinates start in the upper left of the image, with (0,0) being the top left corner, so
                 increasing the y-coordinate value actually amounts to moving lower down in the image. To properly orient the output, the
-                specified y position had to be subtracted from the overall height to find the appropriate coordinate.
+                specified y position had to be subtracted from the overall height to find the appropriate coordinate
             </ul>
         </li>
         <li>
             The grid array is then iterated through, with each line being joined into a single string which is then logged. This yields the image
-            shown below.
+            shown below
         </li>
     </ul>
-</div>
+</section>
 <br />
 <button class="btn btn-sm btn-primary" onclick="toggleVisibleById('#code')">Show/Hide Code</button>
 <div id="code">

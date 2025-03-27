@@ -1,13 +1,12 @@
 html {
     font-size: 14px;
-    background-color: #dadbd2;
+/*    background-color: #dadbd2;
     background-image: url("../assets/images/always-grey.png");
-}
+*/}
 
 @media (min-width: 768px) {
     html {
         font-size: 16px;
-        background-color: #dadbd2;
     }
 }
 
@@ -22,8 +21,8 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: #dadbd2;
-    background-image: url("../assets/images/always-grey.png");
+/*    background-color: #dadbd2;
+    background-image: url("../assets/images/always-grey.png");*/
 }
 
 footer {
