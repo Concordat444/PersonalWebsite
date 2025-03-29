@@ -21,7 +21,7 @@
     },
     "resourceName": {
       "type": "string",
-      "defaultValue": "PersonalWebsite20250325070311",
+      "defaultValue": "PersonalWebsite20250329160220",
       "metadata": {
         "description": "Name of the main resource to be created by this template."
       }

@@ -1,0 +1,52 @@
+﻿@page "/ToDoList"
+@inject IJSRuntime JS
+@using PersonalWebsite.Models.ToDo_Models
+<h3>ToDo List</h3>
+<div class="row justify-content-center">
+    <div class="note">
+        <label for="newNoteText">New Note:</label>
+        <textarea id="NewTextArea" class="form-control" rows="@(Expanded ? "3" : "1")" 
+        @onfocus="() => Expanded = true" @onfocusout="() => Expanded = false"
+        @bind="Text"/>
+        <button class="btn btn-sm btn-primary float-end" @onclick="AddNote">Add</button>
+    </div>
+</div>
+
+@foreach(ToDoModel entry in ToDoList)
+{
+    <ToDoItem Id="@entry.Id" Text="@entry.Item" Complete="@entry.Complete" DeleteEvent="DeleteNote" CompleteEvent="ToggleComplete" />
+}
+<script>
+    function RefocusAfterAdd()
+    {
+    document.querySelector("#NewTextArea").focus();
+    }
+</script>
+@code 
+{
+    public List<ToDoModel> ToDoList { get; set; } = [(new ToDoModel(-1, "Say 'Hi'"))];
+    public bool Expanded { get; set; } = false;
+    public string Text { get; set; } = "";
+    public int NextId { get; set; } = 0;
+
+    public async void AddNote()
+    {
+        if(Text != "")
+        {
+            ToDoModel NewToDo = new ToDoModel(NextId, Text);
+            ToDoList.Add(NewToDo);
+            NextId++;
+            Text = "";
+            await JS.InvokeVoidAsync("RefocusAfterAdd");
+        }
+    }
+    public void DeleteNote(int id)
+    {
+        ToDoList.Remove(ToDoList.First(t => t.Id == id));
+    }
+    public void ToggleComplete(int id)
+    {
+        ToDoModel target = ToDoList.First(e => e.Id == id);
+        target.Complete = !target.Complete;
+    }
+}

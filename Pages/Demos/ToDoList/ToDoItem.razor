@@ -1,0 +1,31 @@
+﻿<div class="note">
+	<div>
+		<p style="@((Complete) ? "text-decoration: line-through;" : "")" @onclick="HandleComplete">@Text</p>
+		<div class="d-flex justify-content-end">
+			<button class="btn btn-danger btn-sm" @onclick="HandleDelete">Delete</button>
+		</div>
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public int Id { get; set; }
+	[Parameter]
+	public string Text { get; set; } = "";
+	[Parameter]
+	public bool Complete { get; set; } = false;
+	[Parameter]
+	public EventCallback<int> DeleteEvent { get; set; }
+	[Parameter]
+	public EventCallback<int> CompleteEvent { get; set; }
+
+	public async Task HandleDelete()
+	{
+		await DeleteEvent.InvokeAsync(Id);
+	}
+	public async Task HandleComplete()
+	{
+		Complete = !Complete;
+		await CompleteEvent.InvokeAsync(Id);
+	}
+}
