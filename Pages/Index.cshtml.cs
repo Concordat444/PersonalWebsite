@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace PersonalWebsite.Pages;
 
@@ -15,5 +16,21 @@ public class IndexModel : PageModel
     public void OnGet()
     {
 
+    }
+
+    public void OnGetCookie()
+    {
+        ITrackingConsentFeature? consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
+        if (consentFeature != null)
+        {
+            if(!consentFeature.HasConsent)
+            {
+                consentFeature.GrantConsent();
+            } else
+            {
+                consentFeature.WithdrawConsent();
+            }
+        }
+        HttpContext.Response.Redirect("/");
     }
 }

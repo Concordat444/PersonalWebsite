@@ -9,6 +9,11 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddServerSideBlazor();
 
+builder.Services.Configure<CookiePolicyOptions>(opts =>
+{
+    opts.CheckConsentNeeded = context => true;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,7 +26,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseCookiePolicy();
 app.UseRouting();
 
 app.UseAuthentication();
