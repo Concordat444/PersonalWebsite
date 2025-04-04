@@ -3,11 +3,14 @@
 @{
     ViewData["Title"] = "Home page";
 }
-@if(!HttpContext.Request.Cookies.ContainsKey(".AspNet.Consent"))
-{
-    <div>This website uses cookies to enable some functionality. Would you like to permit their use?</div>
-    <a class="btn btn-primary" href="/?handler=cookie">Accept</a>
-}
+
+<div class="d-flex m-1 align-items-center justify-content-between border border-2 border-dark rounded">
+    <div class="m-1">This website uses cookies to enable some functionality. Would you like to permit their use?</div>
+    <a class="btn btn-primary m-1" href="/?handler=cookie">
+        @(!HttpContext.Request.Cookies.ContainsKey(".AspNet.Consent") ? "Accept" : "Disable")
+    </a>
+</div>
+
 <div class="text-center">
     <h1 class="display-4">Welcome to my Demonstration Website</h1>
     <p>
