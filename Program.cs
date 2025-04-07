@@ -1,13 +1,26 @@
 using Microsoft.EntityFrameworkCore;
 using PersonalWebsite.Models;
 using Microsoft.AspNetCore.Identity;
+using PersonalWebsite.Models.StoreModels;
 
 var builder = WebApplication.CreateBuilder(args);
+
+if(builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<StoreContext>(options =>
+    {
+        options.UseSqlServer(builder.Configuration[
+            "ConnectionStrings:DevGameConnection"
+            ]);
+        options.EnableSensitiveDataLogging(true);
+    });
+}
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 builder.Services.AddServerSideBlazor();
+builder.Services.AddControllersWithViews();
 
 builder.Services.Configure<CookiePolicyOptions>(opts =>
 {
@@ -34,5 +47,12 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapBlazorHub();
+app.MapControllers();
+app.MapControllerRoute("Store", "{controller=Store}/{action=Index}");
 
+if(app.Environment.IsDevelopment())
+{
+    var storeContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<StoreContext>();
+    SeedStoreData.SeedDatabase(storeContext);
+}
 app.Run();

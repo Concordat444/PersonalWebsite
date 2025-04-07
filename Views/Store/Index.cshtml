@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Game>
+
+<div>
+    <table class="table table-bordered table-striped">
+        <tbody >
+            <tr>
+                <td rowspan="3">
+                    <img src="https://picsum.photos/100" />
+                </td>
+                <td><lable>Title: </lable></td>
+                <td>@(Model.First<Game>().Name)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

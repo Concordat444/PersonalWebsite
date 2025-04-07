@@ -1,0 +1,37 @@
+﻿
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">James Reed's<br />Demo Website</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/AboutMe">About Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Demos/List">Demos List@(ViewData["Demo"] != null ? $": {ViewData["Demo"]}" : "")</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-3 align-self-stretch container-fluid align-content-center">
+                <div class="text-end">
+                    <a href="https://github.com/Concordat444" target="_blank">GitHub</a>
+                </div>
+                <div class="text-end">
+                    <a href="https://linkedin.com/in/james-reed-b4656234" target="_blank">LinkedIn</a>
+                </div>
+                <div class="text-end">
+                    <a href="https://personalwebsite20250329160220-cngvgte2f4cyfeet.canadacentral-01.azurewebsites.net" target="_blank">Personal Site</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
