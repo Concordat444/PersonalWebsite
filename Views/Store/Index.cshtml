@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Game>
+﻿@model StoreListViewModel
 
-@foreach (Game game in Model)
+@foreach (Game game in Model.Games ?? Enumerable.Empty<Game>())
 {
     <div>
         <table class="table table-bordered table-striped">
@@ -24,3 +24,8 @@
         </table>
     </div>
 }
+
+<div page-model="@Model.PagingInfo" page-action="Index"
+     page-classes-enabled="true" page-class="btn"
+     page-class-normal="btn-outline-drk" page-class-selected="btn-primary"
+     page-url-gameCategory="@Model.CurrentCategory!" class="btn-group pull-right m-1"></div>

@@ -7,5 +7,6 @@
         public IEnumerable<Category>? Categories { get; set; } = Enumerable.Empty<Category>();
         public string? User { get; set; }
         public PagingInfo PagingInfo { get; set; } = new PagingInfo();
+        public string? CurrentCategory { get; set; }
     }
 }

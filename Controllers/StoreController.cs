@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PersonalWebsite.Models.StoreModels;
+using PersonalWebsite.Models.StoreModels.ViewModels;
 
 namespace PersonalWebsite.Controllers
 {
@@ -16,21 +17,24 @@ namespace PersonalWebsite.Controllers
             this.context = context;
         }
 
-        public IActionResult Index(string? gameCategory = "all")
+        public IActionResult Index(string? gameCategory, int listPage = 1)
         {
-            if(gameCategory != "all")
+            return View(new StoreListViewModel
             {
-                long categoryId = -1;
-                categoryId = Categories.FirstOrDefault(c => c.Name == gameCategory)?.CategoryID ?? -1;
-                if (categoryId != -1)
+                Games = context.Games.Include(g => g.Category).Include(g => g.ProductOwner)
+                    .Where(g => gameCategory == null ||  g.Category.Name == gameCategory)
+                    .Skip((listPage - 1) * PageSize).Take(PageSize)
+                    .OrderBy(g => g.GameId),
+                PagingInfo = new PagingInfo
                 {
-                    return View(context.Games.Where<Game>(c => c.CategoryId == categoryId).Include(g => g.Category).Include(g => g.ProductOwner));
-                } else
-                {
-                    Response.Redirect("/Store");
-                }
-            }
-            return View(context.Games.Include(g => g.Category).Include(g => g.ProductOwner));
+                    CurrentPage = listPage,
+                    ItemsPerPage = PageSize,
+                    TotalItems = (gameCategory == null)
+                        ? context.Games.Count()
+                        : context.Games.Where(g => g.Category.Name == gameCategory).Count()
+                },
+                CurrentCategory = gameCategory
+            });
         }
     }
 }
