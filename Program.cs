@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using PersonalWebsite.Models;
 using Microsoft.AspNetCore.Identity;
 using PersonalWebsite.Models.StoreModels;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +50,7 @@ app.MapRazorPages();
 app.MapBlazorHub();
 app.MapControllers();
 app.MapControllerRoute("Store", "{controller=Store}/{action=Index}");
+app.MapControllerRoute("Categories", "Store/{gameCategory}", new { Controller = "Store", Action = "Index" });
 
 if(app.Environment.IsDevelopment())
 {
