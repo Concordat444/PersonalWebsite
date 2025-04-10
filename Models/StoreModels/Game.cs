@@ -7,14 +7,15 @@ namespace PersonalWebsite.Models.StoreModels
         public long GameId { get; set; }
 
         public required string Name { get; set; }
-        [Column(TypeName = "decimal(8, 2)")]
-        public decimal Price { get; set; }
-        public string Description { get; set; } = string.Empty;
+        public string GameDescription { get; set; } = string.Empty;
+        public int PublicationYear { get; set; }
+
+        public long ProductId { get; set; }
+        public IEnumerable<Product>? Products { get; set; }
 
         public long CategoryId { get; set; }
         public Category? Category { get; set; }
 
-        public long OwnerId { get; set; }
-        public ProductOwner? ProductOwner { get; set; }
+        public List<PublisherGame> PublisherGames { get; set; } = [];
     }
 }

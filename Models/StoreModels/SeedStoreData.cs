@@ -21,36 +21,40 @@ namespace PersonalWebsite.Models.StoreModels
                 {
                     FirstName = "Jane",
                     LastName = "Doe",
-                    City = "Roswell"
+                    City = "Los Angeles"
                 };
 
                 Category c1 = new Category
                 {
-                    Name = "ClassicalEra"
+                    Name = "Ancient"
                 };
                 Category c2 = new Category
                 {
-                    Name = "NapoleonicWars"
+                    Name = "Napoleonic"
                 };
                 Category c3 = new Category
                 {
-                    Name = "WorldWar2"
+                    Name = "WW2"
+                };
+
+                Publisher AvalonHill = new Publisher
+                {
+                    PublisherName = "The Avalon Hill Game Co"
+                };
+                Publisher ValleyGames = new Publisher
+                {
+                    PublisherName = "Valley Games, Inc."
                 };
 
                 context.Games.AddRange(
-                    new Game { Name = "Classical Game 1", Price = 50, Category = c1, ProductOwner = po1, Description = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque." },
-                    new Game { Name = "Classical Game 2", Price = 50.50m, Category = c1, ProductOwner = po1, Description = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque." },
-                    new Game { Name = "Classical Game 3", Price = 60, Category = c1, ProductOwner = po2, Description = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque." },
-                    new Game { Name = "Napoleonic Game 1", Price = 75.99m, Category = c2, ProductOwner = po1, Description = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque." },
-                    new Game { Name = "Napoleonic Game 2", Price = 90, Category = c2, ProductOwner = po2, Description = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque." },
-                    new Game { Name = "Napoleonic Game 3", Price = 40, Category = c2, ProductOwner = po1, Description = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque." },
-                    new Game { Name = "Napoleonic Game 4", Price = 80, Category = c2, ProductOwner = po2, Description = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque." },
-                    new Game { Name = "WW2 Game 1", Price = 9.99m, Category = c3, ProductOwner = po2, Description = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque." },
-                    new Game { Name = "WW2 Game 2", Price = 24.99m, Category = c3, ProductOwner = po1, Description = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque." },
-                    new Game { Name = "WW2 Game 3", Price = 39.99m, Category = c3, ProductOwner = po2, Description = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque." },
-                    new Game { Name = "WW2 Game 4", Price = 54.99m, Category = c3, ProductOwner = po1, Description = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque." },
-                    new Game { Name = "WW2 Game 5", Price = 69.99m, Category = c3, ProductOwner = po2, Description = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque." },
-                    new Game { Name = "WW2 Game 6", Price = 84.99m, Category = c3, ProductOwner = po1, Description = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque." }
+                    new Game 
+                    { 
+                        Name = "Hannibal: Rome vs. Carthage",
+                        Category = c1,
+
+                        GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
+                    },
+
                     );
                 context.SaveChanges();
             }
