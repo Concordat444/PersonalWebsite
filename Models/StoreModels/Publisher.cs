@@ -5,6 +5,8 @@
         public long PublisherId { get; set; }
         public string PublisherName { get; set; } = string.Empty;
 
-        public List<PublisherGame> PublisherGames { get; set; } = [];
+        public List<Game>? Games { get; set; }
+
+        //public List<PublisherGame> PublisherGames { get; set; } = [];
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PersonalWebsite.Models.StoreModels
 {
@@ -10,8 +11,10 @@ namespace PersonalWebsite.Models.StoreModels
         public decimal Price { get; set; }
         public string SellerDescription { get; set; } = string.Empty;
 
-        public long GameId { get; set; }
-        public required Game Game { get; set; }
+        public long CategoryId { get; set; }
+        public Category? Category { get; set; }
+        public long? GameId { get; set; }
+        public Game? Game { get; set; }
 
         public long OwnerId { get; set; }
         public ProductOwner? ProductOwner { get; set; }

@@ -2,7 +2,7 @@
 {
     public class StoreListViewModel
     {
-        public IEnumerable<Game>? Games { get; set; } = Enumerable.Empty<Game>();
+        public IEnumerable<Product>? Products { get; set; } = Enumerable.Empty<Product>();
         public IEnumerable<ProductOwner>? ProductOwners { get; set; } = Enumerable.Empty<ProductOwner>();
         public IEnumerable<Category>? Categories { get; set; } = Enumerable.Empty<Category>();
         public string? User { get; set; }

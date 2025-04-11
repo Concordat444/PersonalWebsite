@@ -1,5 +1,8 @@
-﻿namespace PersonalWebsite.Models.StoreModels
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace PersonalWebsite.Models.StoreModels
 {
+    [Keyless]
     public class PublisherGame
     {
         public long PublisherId { get; set; }

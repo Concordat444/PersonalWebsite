@@ -1,6 +1,6 @@
 ﻿@model StoreListViewModel
 
-@foreach (Game game in Model.Games ?? Enumerable.Empty<Game>())
+@foreach (Product product in Model.Products ?? Enumerable.Empty<Product>())
 {
     <div>
         <table class="table table-bordered table-striped">
@@ -10,15 +10,15 @@
                         <img src="https://picsum.photos/100" />
                     </td>
                     <td><lable>Title: </lable></td>
-                    <td>@(game.Name)</td>
+                    <td>@(product.Name)</td>
                 </tr>
                 <tr>
                     <td><label for="Description">Description</label></td>
-                    <td><p>@(game.Description)</p></td>
+                    <td><p>@(product.Game.GameDescription)</p></td>
                 </tr>
                 <tr>
                     <td><label for="Price">Price</label></td>
-                    <td>@(game.Price.ToString("c"))</td>
+                    <td>@(product.Price.ToString("c"))</td>
                 </tr>
             </tbody>
         </table>

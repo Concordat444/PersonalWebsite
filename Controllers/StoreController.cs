@@ -21,7 +21,7 @@ namespace PersonalWebsite.Controllers
         {
             return View(new StoreListViewModel
             {
-                Games = context.Games.Include(g => g.Category).Include(g => g.ProductOwner)
+                Products = context.Products.Include(g => g.Game).Include(g => g.ProductOwner)
                     .Where(g => gameCategory == null ||  g.Category.Name == gameCategory)
                     .Skip((listPage - 1) * PageSize).Take(PageSize)
                     .OrderBy(g => g.GameId),
@@ -30,8 +30,8 @@ namespace PersonalWebsite.Controllers
                     CurrentPage = listPage,
                     ItemsPerPage = PageSize,
                     TotalItems = (gameCategory == null)
-                        ? context.Games.Count()
-                        : context.Games.Where(g => g.Category.Name == gameCategory).Count()
+                        ? context.Products.Count()
+                        : context.Products.Where(g => g.Category.Name == gameCategory).Count()
                 },
                 CurrentCategory = gameCategory
             });

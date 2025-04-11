@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PersonalWebsite.Models.StoreModels
 {
@@ -9,13 +10,15 @@ namespace PersonalWebsite.Models.StoreModels
         public required string Name { get; set; }
         public string GameDescription { get; set; } = string.Empty;
         public int PublicationYear { get; set; }
+        public string ImageLink { get; set; } = string.Empty;
 
-        public long ProductId { get; set; }
         public IEnumerable<Product>? Products { get; set; }
 
         public long CategoryId { get; set; }
         public Category? Category { get; set; }
 
-        public List<PublisherGame> PublisherGames { get; set; } = [];
+        public List<Publisher>? Publishers { get; set; }
+
+        //public List<PublisherGame> PublisherGames { get; set; } = [];
     }
 }
