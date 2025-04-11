@@ -2,27 +2,7 @@
 
 @foreach (Product product in Model.Products ?? Enumerable.Empty<Product>())
 {
-    <div>
-        <table class="table table-bordered table-striped">
-            <tbody >
-                <tr>
-                    <td rowspan="3" class="col-2">
-                        <img src="https://picsum.photos/100" />
-                    </td>
-                    <td><lable>Title: </lable></td>
-                    <td>@(product.Name)</td>
-                </tr>
-                <tr>
-                    <td><label for="Description">Description</label></td>
-                    <td><p>@(product.Game.GameDescription)</p></td>
-                </tr>
-                <tr>
-                    <td><label for="Price">Price</label></td>
-                    <td>@(product.Price.ToString("c"))</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <partial name="ProductSummary" model="product" />
 }
 
 <div page-model="@Model.PagingInfo" page-action="Index"

@@ -46,3 +46,9 @@ footer {
     margin: 16px;
     float: left;
 }
+
+.game-thumbnail {
+    width: 200px;
+    height: 300px;
+    object-fit: contain;
+}

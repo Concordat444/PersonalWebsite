@@ -7,11 +7,11 @@ namespace PersonalWebsite.Models.StoreModels
         public static void SeedDatabase(StoreContext context)
         {
             context.Database.Migrate();
-            if (context.Games.Count() == 0
-                    && context.ProductOwners.Count() == 0
-                    && context.Categories.Count() == 0)
+            if (!context.Games.Any()
+                    && !context.ProductOwners.Any()
+                    && !context.Categories.Any())
             {
-                ProductOwner po1 = new ProductOwner
+                ProductOwner po1 = new()
                 {
                     Username = "JohnDoe1",
                     FirstName = "John",
@@ -19,7 +19,7 @@ namespace PersonalWebsite.Models.StoreModels
                     City = "Atlanta",
                     EMail = "johndoe1@example.com"
                 };
-                ProductOwner po2 = new ProductOwner
+                ProductOwner po2 = new()
                 {
                     Username = "JaneDoe1",
                     FirstName = "Jane",
@@ -28,15 +28,15 @@ namespace PersonalWebsite.Models.StoreModels
                     EMail = "janedoe1@example.com"
                 };
 
-                Category c1 = new Category
+                Category c1 = new()
                 {
                     Name = "Ancient"
                 };
-                Category c2 = new Category
+                Category c2 = new()
                 {
                     Name = "Napoleonic"
                 };
-                Category c3 = new Category
+                Category c3 = new()
                 {
                     Name = "WW2"
                 };
@@ -248,9 +248,8 @@ namespace PersonalWebsite.Models.StoreModels
                     
                     Name = "Hannibal: Rome vs. Carthage",
                     Category = c1,
-                    Publishers = new List<Publisher> { _p1AvalonHill, _p2ValleyGames },
+                    Publishers = [_p1AvalonHill, _p2ValleyGames],
                     PublicationYear = 1996,
-                    ImageLink = "https://boardgamegeek.com/image/774569/the-great-battles-of-alexander-deluxe-edition",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
                 Game game2 = new()
@@ -258,7 +257,7 @@ namespace PersonalWebsite.Models.StoreModels
                     
                     Name = "Sword of Rome: Conquest of Italy, 362-272 BC",
                     Category = c1,
-                    Publishers = new List<Publisher> { _p3GMTGames },
+                    Publishers = [_p3GMTGames],
                     PublicationYear = 2004,
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
@@ -267,8 +266,9 @@ namespace PersonalWebsite.Models.StoreModels
                     
                     Name = "The Great Battles of Alexander: Deluxe Edition",
                     Category = c1,
-                    Publishers = new List<Publisher> { _p3GMTGames },
+                    Publishers = [_p3GMTGames],
                     PublicationYear = 1995,
+                    ImageLink = "https://cf.geekdo-images.com/suTjL2RCVl12Mwftjfon-Q__imagepagezoom/img/bE7Dp_LJJxF1lMWOevHvFJP5Dys=/fit-in/1200x900/filters:no_upscale():strip_icc()/pic774569.jpg",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
                 Game game4 = new()
@@ -276,7 +276,7 @@ namespace PersonalWebsite.Models.StoreModels
                     
                     Name = "Empires in Arms",
                     Category = c2,
-                    Publishers = new List<Publisher> { _p1AvalonHill, _p4AustralianDesignGroup },
+                    Publishers = [_p1AvalonHill, _p4AustralianDesignGroup],
                     PublicationYear = 1983,
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
@@ -285,7 +285,7 @@ namespace PersonalWebsite.Models.StoreModels
                     
                     Name = "The Napoleonic Wars (Second Edition)",
                     Category = c2,
-                    Publishers = new List<Publisher> { _p3GMTGames },
+                    Publishers = [_p3GMTGames],
                     PublicationYear = 2008,
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
@@ -294,7 +294,7 @@ namespace PersonalWebsite.Models.StoreModels
                     
                     Name = "Age of Napoleon",
                     Category = c2,
-                    Publishers = new List<Publisher> { _p5MayfairGames, _p6Phalanx, _p7DaysOfWonder },
+                    Publishers = [_p5MayfairGames, _p6Phalanx, _p7DaysOfWonder],
                     PublicationYear = 2003,
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
@@ -303,7 +303,7 @@ namespace PersonalWebsite.Models.StoreModels
                     
                     Name = "War and Peace",
                     Category = c2,
-                    Publishers = new List<Publisher> { _p1AvalonHill },
+                    Publishers = [_p1AvalonHill],
                     PublicationYear = 1980,
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
@@ -312,7 +312,7 @@ namespace PersonalWebsite.Models.StoreModels
                     
                     Name = "Memoir '44",
                     Category = c3,
-                    Publishers = new List<Publisher> { _p7DaysOfWonder, _p8ADCBlackfire, _p9EdgeEntertainment },
+                    Publishers = [_p7DaysOfWonder, _p8ADCBlackfire, _p9EdgeEntertainment],
                     PublicationYear = 2004,
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
@@ -321,7 +321,7 @@ namespace PersonalWebsite.Models.StoreModels
                     
                     Name = "Combat Commander: Europe",
                     Category = c3,
-                    Publishers = new List<Publisher> { _p3GMTGames, _p10Devir },
+                    Publishers = [_p3GMTGames, _p10Devir],
                     PublicationYear = 2006,
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
@@ -330,7 +330,7 @@ namespace PersonalWebsite.Models.StoreModels
                     
                     Name = "Churchill",
                     Category = c3,
-                    Publishers = new List<Publisher> { _p3GMTGames, _p10Devir, _p11ErgoLudir, _p12FoxInTheBox },
+                    Publishers = [_p3GMTGames, _p10Devir, _p11ErgoLudir, _p12FoxInTheBox],
                     PublicationYear = 2004,
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
@@ -339,7 +339,7 @@ namespace PersonalWebsite.Models.StoreModels
                     
                     Name = "Tide of Iron",
                     Category = c3,
-                    Publishers = new List<Publisher> { _p13FantasyFlight, _p9EdgeEntertainment, _p14NexusEditrice, _p15Ubik },
+                    Publishers = [_p13FantasyFlight, _p9EdgeEntertainment, _p14NexusEditrice, _p15Ubik],
                     PublicationYear = 2007,
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
@@ -348,7 +348,7 @@ namespace PersonalWebsite.Models.StoreModels
                     
                     Name = "Panzergruppe Guderian",
                     Category = c3,
-                    Publishers = new List<Publisher> { _p1AvalonHill, _p16SPI },
+                    Publishers = [_p1AvalonHill, _p16SPI],
                     PublicationYear = 1976,
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
@@ -357,7 +357,7 @@ namespace PersonalWebsite.Models.StoreModels
                     
                     Name = "Triumph & Tragedy: European Balance of Power 1936-1945",
                     Category = c3,
-                    Publishers = new List<Publisher> { _p3GMTGames },
+                    Publishers = [_p3GMTGames],
                     PublicationYear = 2015,
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
