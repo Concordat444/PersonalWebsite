@@ -7,7 +7,7 @@ namespace PersonalWebsite.Models.StoreModels
     {
         public long GameId { get; set; }
 
-        public required string Name { get; set; }
+        public required string Name { get; set; } = string.Empty;
         public string GameDescription { get; set; } = string.Empty;
         public int PublicationYear { get; set; }
         public string ImageLink { get; set; } = string.Empty;

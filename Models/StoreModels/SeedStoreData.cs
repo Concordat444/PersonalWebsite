@@ -40,6 +40,10 @@ namespace PersonalWebsite.Models.StoreModels
                 {
                     Name = "WW2"
                 };
+                Category c4 = new()
+                {
+                    Name = "Other"
+                };
                 
                 //define publishers
                 Publisher _p1AvalonHill = new()
@@ -469,6 +473,10 @@ namespace PersonalWebsite.Models.StoreModels
                      ProductOwner = po1,
                      Price = 74.99m
                     }
+                );
+                context.Categories.Add(
+                    new()
+                    { Name = "Other" }
                 );
 
                 context.SaveChanges();

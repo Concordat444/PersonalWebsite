@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalWebsite.Models.StoreModels;
 
@@ -11,9 +12,11 @@ using PersonalWebsite.Models.StoreModels;
 namespace PersonalWebsite.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20250411152804_CorrectedSchema")]
+    partial class CorrectedSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,10 +108,13 @@ namespace PersonalWebsite.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long>("OwnerId")
+                        .HasColumnType("bigint");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(8, 2)");
 
-                    b.Property<long?>("ProductOwnerId")
+                    b.Property<long?>("ProductOwnerOwnerId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("SellerDescription")
@@ -121,18 +127,18 @@ namespace PersonalWebsite.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.HasIndex("ProductOwnerId");
+                    b.HasIndex("ProductOwnerOwnerId");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("PersonalWebsite.Models.StoreModels.ProductOwner", b =>
                 {
-                    b.Property<long>("ProductOwnerId")
+                    b.Property<long>("OwnerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ProductOwnerId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("OwnerId"));
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -154,7 +160,7 @@ namespace PersonalWebsite.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ProductOwnerId");
+                    b.HasKey("OwnerId");
 
                     b.ToTable("ProductOwners");
                 });
@@ -216,7 +222,7 @@ namespace PersonalWebsite.Migrations
 
                     b.HasOne("PersonalWebsite.Models.StoreModels.ProductOwner", "ProductOwner")
                         .WithMany("Products")
-                        .HasForeignKey("ProductOwnerId");
+                        .HasForeignKey("ProductOwnerOwnerId");
 
                     b.Navigation("Category");
 

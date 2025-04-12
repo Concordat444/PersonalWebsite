@@ -19,7 +19,7 @@ if(builder.Environment.IsDevelopment())
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
+builder.Services.AddCors();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddControllersWithViews();
 
