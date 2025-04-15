@@ -94,5 +94,14 @@ namespace PersonalWebsite.Controllers
             await context.SaveChangesAsync();
             return Ok();
         }
+
+        //[HttpPatch]
+        //public async Task<IActionResult> ModifyGame(Game game)
+        //{
+        //    if(context.Games.FirstOrDefault(g =>  g.GameId == game.GameId) == null)
+        //    {
+
+        //    }
+        //}
     }
 }

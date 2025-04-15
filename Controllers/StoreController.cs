@@ -36,5 +36,13 @@ namespace PersonalWebsite.Controllers
                 CurrentCategory = gameCategory
             });
         }
+
+        public async Task<IActionResult> Details(long id)
+        {
+            Product? product = await context.Products.Include(p => p.Category).Include(p => p.Game).FirstOrDefaultAsync(p => p.ProductId == id)
+                ?? new() { Name = string.Empty };
+            ProductViewModel model = ProductViewModelFactory.Details(product);
+            return View("ProductEditor", model);
+        }
     }
 }
