@@ -18,19 +18,43 @@
         <input class="form-control" asp-for="Product.Price" readonly="@Model?.ReadOnly" />
     </div>
     <div class="form-group">
-        <label asp-for="Product.CategoryId">Category</label>
-        <select asp-for="Product.CategoryId" class="form-control"
-        disabled="@Model?.ReadOnly"
-        asp-items="@(new SelectList(Model?.Categories, "CategoryID", "Name"))">                
-            <option value="" disabled selected>Choose a Category</option>
-        </select>
-    </div>
-    <div class="form-group">
         <label asp-for="Product.GameId">Game</label>
         <select asp-for="Product.GameId" class="form-control"
         disabled="@Model?.ReadOnly"
-        asp-items="@(new SelectList(Model?.Games, "GameId", "Name"))">                
+        asp-items="@(new SelectList(Model?.Games, "GameId", "Name"))">
             <option value="" disabled selected>Choose a Game</option>
+        </select>
+    </div>
+    @if(Model?.Action == "Details")
+    {
+    <div class="d-flex">
+        <div class="form-group col-2">
+            <label asp-for="Product.Game.Category.Name">Category</label>
+            <input class="form-control" asp-for="Product.Game.Category.Name" readonly />
+        </div>
+        <div class="form-group col-2 px-1">
+            <label asp-for="Product.Game.PublicationYear">Year of Publication</label>
+            <input class="form-control" asp-for="Product.Game.PublicationYear" readonly />
+        </div>
+        <div class="form-group px-1">
+            <div>
+                <label class="mx-1" asp-for="Product.Game.Publishers">Publisher(s)</label>
+            </div>
+            <div class="d-flex">
+                @foreach(Publisher publisher in (Model?.Product.Game?.Publishers?.Take(4) ?? []))
+                {
+                <input class="form-control mx-1" asp-for="@publisher.PublisherName" readonly />
+                }
+            </div>
+        </div>
+    </div>
+    }
+    <div class="form-group">
+        <label asp-for="Product.ProductOwnerId">Seller</label>
+        <select asp-for="Product.ProductOwnerId" class="form-control"
+                disabled="@Model?.ReadOnly"
+                asp-items="@(new SelectList(Model?.ProductOwners, "ProductOwnerId", "Username"))">
+            <option value="" disabled selected>Seller</option>
         </select>
     </div>
     @if(Model?.ShowAction == true)

@@ -249,11 +249,11 @@ namespace PersonalWebsite.Models.StoreModels
                 */
                 Game game1 = new()
                 {
-                    
                     Name = "Hannibal: Rome vs. Carthage",
                     Category = c1,
                     Publishers = [_p1AvalonHill, _p2ValleyGames],
                     PublicationYear = 1996,
+                    ImageLink = "https://cf.geekdo-images.com/bqr3DAoxWUz1VeOCRk7gkw__imagepage/img/P7ufvJyife0zMQlETHUguMkcTrQ=/fit-in/900x600/filters:no_upscale():strip_icc()/pic706069.jpg",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
                 Game game2 = new()
@@ -263,6 +263,7 @@ namespace PersonalWebsite.Models.StoreModels
                     Category = c1,
                     Publishers = [_p3GMTGames],
                     PublicationYear = 2004,
+                    ImageLink = "https://cf.geekdo-images.com/viMWvaaeGVKNWdyntFLfqA__imagepage/img/OY3_VdCqL0MR3d0uIHlQI2tlGhU=/fit-in/900x600/filters:no_upscale():strip_icc()/pic1994346.png",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
                 Game game3 = new()
@@ -282,6 +283,7 @@ namespace PersonalWebsite.Models.StoreModels
                     Category = c2,
                     Publishers = [_p1AvalonHill, _p4AustralianDesignGroup],
                     PublicationYear = 1983,
+                    ImageLink = "https://cf.geekdo-images.com/jaeUmGmOuicA5q3Il4Mb2w__imagepage/img/hUemZEKcVBoKwjKR9MS1ZVS_zFA=/fit-in/900x600/filters:no_upscale():strip_icc()/pic3651485.jpg",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
                 Game game5 = new()
@@ -291,6 +293,7 @@ namespace PersonalWebsite.Models.StoreModels
                     Category = c2,
                     Publishers = [_p3GMTGames],
                     PublicationYear = 2008,
+                    ImageLink = "https://cf.geekdo-images.com/FrPL_qZ0iyeJTA5JkPt-Fw__imagepage/img/_HnIvdEVffm_NdzoVPUf4IVtkKQ=/fit-in/900x600/filters:no_upscale():strip_icc()/pic1445591.jpg",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
                 Game game6 = new()
@@ -300,6 +303,7 @@ namespace PersonalWebsite.Models.StoreModels
                     Category = c2,
                     Publishers = [_p5MayfairGames, _p6Phalanx, _p7DaysOfWonder],
                     PublicationYear = 2003,
+                    ImageLink = "https://cf.geekdo-images.com/cLeiw8Mr64WShG6qFjIBKQ__imagepage/img/Telfyqb9GobYGTCVt4BPRvqqi70=/fit-in/900x600/filters:no_upscale():strip_icc()/pic1248514.jpg",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
                 Game game7 = new()
@@ -309,6 +313,7 @@ namespace PersonalWebsite.Models.StoreModels
                     Category = c2,
                     Publishers = [_p1AvalonHill],
                     PublicationYear = 1980,
+                    ImageLink = "https://cf.geekdo-images.com/T03zd8X7Wh78nVitu3Mk-g__imagepage/img/in6Pc_MRwlZVvRaykz96vP2BmWY=/fit-in/900x600/filters:no_upscale():strip_icc()/pic460249.jpg",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
                 Game game8 = new()
@@ -318,6 +323,7 @@ namespace PersonalWebsite.Models.StoreModels
                     Category = c3,
                     Publishers = [_p7DaysOfWonder, _p8ADCBlackfire, _p9EdgeEntertainment],
                     PublicationYear = 2004,
+                    ImageLink = "https://cf.geekdo-images.com/2AjxTtgBtZVst8wOAk1NAA__imagepage/img/ssOuDRJ3MxIcCTmV3avXkgpCCSk=/fit-in/900x600/filters:no_upscale():strip_icc()/pic6974498.jpg",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
                 Game game9 = new()
@@ -327,6 +333,7 @@ namespace PersonalWebsite.Models.StoreModels
                     Category = c3,
                     Publishers = [_p3GMTGames, _p10Devir],
                     PublicationYear = 2006,
+                    ImageLink = "https://cf.geekdo-images.com/uKaL10FK-u9wfYyK6MQaNg__imagepage/img/_MhNPugHY9pzwYcvi855tBfWK4c=/fit-in/900x600/filters:no_upscale():strip_icc()/pic992459.jpg",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
                 Game game10 = new()
@@ -336,6 +343,7 @@ namespace PersonalWebsite.Models.StoreModels
                     Category = c3,
                     Publishers = [_p3GMTGames, _p10Devir, _p11ErgoLudir, _p12FoxInTheBox],
                     PublicationYear = 2004,
+                    ImageLink = "https://cf.geekdo-images.com/wnzE76dkpb6qhSrmF2Fifw__imagepage/img/whREHJrsBU0akcMLs-KGViesWvU=/fit-in/900x600/filters:no_upscale():strip_icc()/pic2467234.jpg",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
                 Game game11 = new()
@@ -345,6 +353,7 @@ namespace PersonalWebsite.Models.StoreModels
                     Category = c3,
                     Publishers = [_p13FantasyFlight, _p9EdgeEntertainment, _p14NexusEditrice, _p15Ubik],
                     PublicationYear = 2007,
+                    ImageLink = "https://cf.geekdo-images.com/MMQ5yH76vLnJTiHDzgoY6Q__imagepage/img/RdcUxof-13mHOZJroaiWmNlCYJw=/fit-in/900x600/filters:no_upscale():strip_icc()/pic140479.jpg",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
                 Game game12 = new()
@@ -354,6 +363,7 @@ namespace PersonalWebsite.Models.StoreModels
                     Category = c3,
                     Publishers = [_p1AvalonHill, _p16SPI],
                     PublicationYear = 1976,
+                    ImageLink = "https://cf.geekdo-images.com/9qeztvPY0HggjQ0rR-XJ4g__imagepage/img/EFYOS5ra1ciFwNdhNvxEmicYaak=/fit-in/900x600/filters:no_upscale():strip_icc()/pic4969198.jpg",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
                 Game game13 = new()
@@ -363,6 +373,7 @@ namespace PersonalWebsite.Models.StoreModels
                     Category = c3,
                     Publishers = [_p3GMTGames],
                     PublicationYear = 2015,
+                    ImageLink = "https://cf.geekdo-images.com/KuJMYH3VVj3BriDYaYvDQw__imagepage/img/vkzsumo4e0XWr4NIotoxP7zD56A=/fit-in/900x600/filters:no_upscale():strip_icc()/pic2497742.jpg",
                     GameDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
                 };
 
@@ -373,7 +384,7 @@ namespace PersonalWebsite.Models.StoreModels
                     {
                      Game = game1,
                      Name = game1.Name,
-                     Category = c1,
+                     //Category = c1,
                      ProductOwner = po1,
                      Price = 14.99m
                     },
@@ -381,7 +392,7 @@ namespace PersonalWebsite.Models.StoreModels
                     {
                      Game = game2,
                      Name = game2.Name,
-                     Category = c1,
+                     //Category = c1,
                      ProductOwner = po2,
                      Price = 19.99m
                     },
@@ -389,7 +400,7 @@ namespace PersonalWebsite.Models.StoreModels
                     {
                      Game = game3,
                      Name = game3.Name,
-                     Category = c1,
+                     //Category = c1,
                      ProductOwner = po1,
                      Price = 24.99m
                     },
@@ -397,7 +408,7 @@ namespace PersonalWebsite.Models.StoreModels
                     {
                      Game = game4,
                      Name = game4.Name,
-                     Category = c2,
+                     //Category = c2,
                      ProductOwner = po2,
                      Price = 29.99m
                     },
@@ -405,7 +416,7 @@ namespace PersonalWebsite.Models.StoreModels
                     {
                      Game = game5,
                      Name = game5.Name,
-                     Category = c2,
+                     //Category = c2,
                      ProductOwner = po1,
                      Price = 34.99m
                     },
@@ -413,7 +424,7 @@ namespace PersonalWebsite.Models.StoreModels
                     {
                      Game = game6,
                      Name = game6.Name,
-                     Category = c2,
+                     //Category = c2,
                      ProductOwner = po2,
                      Price = 39.99m
                     },
@@ -421,7 +432,7 @@ namespace PersonalWebsite.Models.StoreModels
                     {
                      Game = game7,
                      Name = game7.Name,
-                     Category = c2,
+                     //Category = c2,
                      ProductOwner = po1,
                      Price = 44.99m
                     },
@@ -429,7 +440,7 @@ namespace PersonalWebsite.Models.StoreModels
                     {
                      Game = game8,
                      Name = game8.Name,
-                     Category = c3,
+                     //Category = c3,
                      ProductOwner = po2,
                      Price = 49.99m
                     },
@@ -437,7 +448,7 @@ namespace PersonalWebsite.Models.StoreModels
                     {
                      Game = game9,
                      Name = game9.Name,
-                     Category = c3,
+                     //Category = c3,
                      ProductOwner = po1,
                      Price = 54.99m
                     },
@@ -445,7 +456,7 @@ namespace PersonalWebsite.Models.StoreModels
                     {
                      Game = game10,
                      Name = game10.Name,
-                     Category = c3,
+                     //Category = c3,
                      ProductOwner = po2,
                      Price = 59.99m
                     },
@@ -453,7 +464,7 @@ namespace PersonalWebsite.Models.StoreModels
                     {
                      Game = game11,
                      Name = game11.Name,
-                     Category = c3,
+                     //Category = c3,
                      ProductOwner = po1,
                      Price = 64.99m
                     },
@@ -461,7 +472,7 @@ namespace PersonalWebsite.Models.StoreModels
                     {
                      Game = game12,
                      Name = game12.Name,
-                     Category = c3,
+                     //Category = c3,
                      ProductOwner = po2,
                      Price = 69.99m
                     },
@@ -469,7 +480,7 @@ namespace PersonalWebsite.Models.StoreModels
                     {
                      Game = game13,
                      Name = game13.Name,
-                     Category = c3,
+                     //Category = c3,
                      ProductOwner = po1,
                      Price = 74.99m
                     }

@@ -9,7 +9,7 @@
         public string Theme { get; set; } = "primary";
         public bool ShowAction { get; set; } = true;
         public IEnumerable<Game> Games { get; set; } = [];
-        public IEnumerable<Category> Categories { get; set; } = [];
+        public IEnumerable<ProductOwner> ProductOwners { get; set; } = [];
         public ProductOwner Owner { get; set; } = new() { City = string.Empty, EMail = string.Empty, FirstName = string.Empty, LastName= string.Empty, Username = string.Empty };
     }
 }
