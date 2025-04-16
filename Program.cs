@@ -49,7 +49,7 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.MapBlazorHub();
 app.MapControllers();
-app.MapControllerRoute("Store", "{controller=Store}/{action=Index}");
+app.MapControllerRoute("Store", "/Store/{controller=Store}/{action=Index}");
 app.MapControllerRoute("Pages", "Store/Page{listPage}", new { Controller = "Store", Action = "Index", listPage = 1 });
 app.MapControllerRoute("Categories", "Store/{gameCategory}", new { Controller = "Store", Action = "Index" });
 app.MapControllerRoute("CatPage", "Store/{gameCategory}/Page{listPage}", new { Controller = "Store", Action = "Index", listPage = 1 });
