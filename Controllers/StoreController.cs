@@ -22,10 +22,9 @@ namespace PersonalWebsite.Controllers
         {
             return View(new StoreListViewModel
             {
-                Products = context.Products.Include(g => g.Game).Include(g => g.ProductOwner)
+                Products = context.Products.Include(g => g.Game).Include(g => g.ProductOwner).OrderBy(g => g.GameId)
                     .Where(g => gameCategory == null ||  (g.Game!.Category!.Name == gameCategory))
-                    .Skip((listPage - 1) * PageSize).Take(PageSize)
-                    .OrderBy(g => g.GameId),
+                    .Skip((listPage - 1) * PageSize).Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = listPage,
@@ -74,7 +73,7 @@ namespace PersonalWebsite.Controllers
                 product.ProductOwner = default;
                 context.Products.Add(product);
                 await context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToRoute("Pages");
             }
             return View("ProductEditor", ProductViewModelFactory
                 .Create(new Product { Name = string.Empty }, Games, ProductOwners));
