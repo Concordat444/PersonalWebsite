@@ -1,0 +1,13 @@
+﻿@page "/Store/SignIn"
+@model PersonalWebsite.Pages.Store.SignInModel
+
+<form method="post">
+    <div class="form-group">
+        @if (Model.Account == null)
+        {
+            <label asp-for="Account">Username</label>
+            <input class="form-control" asp-for="Account" />
+        }
+    </div>
+    <button class="btn btn-primary btn-sm" type="submit">@(Model.Account == null ? "Sign In" : "Sign Out")</button>
+</form>
