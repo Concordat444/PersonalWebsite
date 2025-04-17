@@ -3,20 +3,17 @@ using PersonalWebsite.Models;
 using Microsoft.AspNetCore.Identity;
 using PersonalWebsite.Models.StoreModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
- string connString = builder.Configuration.GetConnectionString("SQLCONNSTR_GameStoreDbConnection");
-
+string? connString = System.Environment.GetEnvironmentVariable("SQLCONNSTR_GameStoreDbConnection");
+string testConnString = builder.Configuration["SQLCONNSTR"]!;
 
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddDbContext<StoreContext>(options =>
     {
-        options.UseSqlServer(builder.Configuration[
-            "ConnectionStrings:DevGameConnection"
-            ]);
+        options.UseSqlServer(builder.Configuration["ConnectionStrings:DevGameConnection"]);
         options.EnableSensitiveDataLogging(true);
     });
 } else
@@ -64,9 +61,9 @@ app.MapControllerRoute("Pages", "Store/Page{listPage}", new { Controller = "Stor
 app.MapControllerRoute("Categories", "Store/{gameCategory}", new { Controller = "Store", Action = "Index" });
 app.MapControllerRoute("CatPage", "Store/{gameCategory}/Page{listPage}", new { Controller = "Store", Action = "Index", listPage = 1 });
 
-if (app.Environment.IsDevelopment())
-{
-    var storeContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<StoreContext>();
-    SeedStoreData.SeedDatabase(storeContext);
-}
+//if (app.Environment.IsDevelopment())
+//{
+var storeContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<StoreContext>();
+SeedStoreData.SeedDatabase(storeContext);
+//}
 app.Run();
