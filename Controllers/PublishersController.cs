@@ -45,9 +45,11 @@ namespace PersonalWebsite.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdatePublisher([FromBody] PublisherBindingTarget target)
         {
-            //if (target.Id == null)
-            //    ModelState.AddModelError("IdRequired", "An Id is required to modify an existing entry.");
-            if(ModelState.IsValid)
+            if (target.Id <= 16)
+            {
+                return StatusCode(405, new { message = "Entries 1-16 are required for demonstration purposes and may not be altered." });
+            }
+            if (ModelState.IsValid)
             {
                 List<Game> games = target.GameIds == null
                     ? []
@@ -67,6 +69,10 @@ namespace PersonalWebsite.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemovePublisher(long id)
         {
+            if (id <= 16)
+            {
+                return StatusCode(405, new { message = "Entries 1-16 are required for demonstration purposes and may not be altered." });
+            }
             context.Publisher.Remove(new()
             {
                 PublisherId = id,

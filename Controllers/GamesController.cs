@@ -73,7 +73,10 @@ namespace PersonalWebsite.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateGame([FromBody] Game game)
         {
-            
+            if(game.GameId <= 13)
+            {
+                return StatusCode(405, new { message = "Entries 1-13 are required for demonstration purposes and may not be altered."  } );
+            }
             if(context.Games.FirstOrDefaultAsync(g => g.GameId == game.GameId) == null)
             {
                 return NotFound();
@@ -86,6 +89,10 @@ namespace PersonalWebsite.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGame(long id)
         {
+            if (id <= 13)
+            {
+                return StatusCode(405, new { message = "Entries 1-13 are required for demonstration purposes and may not be altered." });
+            }
             context.Games.Remove(new Game()
             {
                 GameId = id,
