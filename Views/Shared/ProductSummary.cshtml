@@ -28,8 +28,15 @@
             <tr>
                 <td class="text-center">
                     <a asp-action="Details" asp-route-id="@Model.ProductId" class="btn btn-sm btn-info">Details</a>
-                    <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@Model.ProductId" class="btn btn-sm btn-danger">Delete</a>
+                    @if
+                    (
+                        Context.Request.Cookies["User"] != null
+                        && Model.ProductOwner.Username == Context.Request.Cookies["User"]
+                    )
+                    {
+                        <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@Model.ProductId" class="btn btn-sm btn-danger">Delete</a>
+                    }
                 </td>
             </tr>
         </tbody>

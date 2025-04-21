@@ -1,0 +1,11 @@
+﻿@using PersonalWebsite.Infrastructure
+
+<div class="container text-center">
+    @if(ViewBag.User != null)
+    {
+        <a asp-page="/Store/SignIn" asp-page-handler="SignOut" asp-route-ReturnUrl="@ViewBag.ReturnUrl" >@ViewBag.User</a>
+    } else
+    {
+        <a asp-page="/Store/SignIn" asp-route-ReturnUrl="@ViewBag.ReturnUrl">Sign In</a>
+    }
+</div>
