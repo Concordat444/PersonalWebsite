@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PersonalWebsite.Models.StoreModels;
 using PersonalWebsite.Models.StoreModels.APIOutputs;
 
-namespace PersonalWebsite.Controllers
+namespace PersonalWebsite.Areas.Store.Controllers
 {
     [Route("api/[Controller]")]
     public class PublishersController(StoreContext context) : ControllerBase

@@ -3,9 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using PersonalWebsite.Models.StoreModels;
 using PersonalWebsite.Models.StoreModels.ViewModels;
 
-namespace PersonalWebsite.Controllers
+namespace PersonalWebsite.Areas.Store.Controllers
 {
-    public class StoreController : Controller
+    [Area("Store")]
+    public class HomeController : Controller
     {
         private StoreContext context;
         private IEnumerable<Category> Categories => context.Categories;
@@ -13,7 +14,7 @@ namespace PersonalWebsite.Controllers
         private IEnumerable<Game> Games => context.Games;
         public int PageSize = 5;
 
-        public StoreController(StoreContext context)
+        public HomeController(StoreContext context)
         {
             this.context = context;
         }
@@ -23,14 +24,14 @@ namespace PersonalWebsite.Controllers
             return View(new StoreListViewModel
             {
                 Products = context.Products.Include(g => g.Game).Include(g => g.ProductOwner)
-                    .Where(g => gameCategory == null ||  (g.Game!.Category!.Name == gameCategory))
+                    .Where(g => gameCategory == null ||  g.Game!.Category!.Name == gameCategory)
                     .Skip((listPage - 1) * PageSize).Take(PageSize)
                     .OrderBy(g => g.GameId),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = listPage,
                     ItemsPerPage = PageSize,
-                    TotalItems = (gameCategory == null)
+                    TotalItems = gameCategory == null
                         ? context.Products.Count()
                         : context.Products.Where(g => g.Game!.Category!.Name == gameCategory).Count()
                 },

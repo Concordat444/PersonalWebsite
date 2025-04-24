@@ -56,10 +56,10 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.MapBlazorHub();
 app.MapControllers();
-app.MapControllerRoute("Store", "{controller=Store}/{action=Index}");
-app.MapControllerRoute("Pages", "Store/Page{listPage}", new { Controller = "Store", Action = "Index", listPage = 1 });
-app.MapControllerRoute("Categories", "Store/{gameCategory}", new { Controller = "Store", Action = "Index" });
-app.MapControllerRoute("CatPage", "Store/{gameCategory}/Page{listPage}", new { Controller = "Store", Action = "Index", listPage = 1 });
+app.MapControllerRoute("StoreArea", "{area:exists}/{controller=Home}/{action=Index}");
+app.MapAreaControllerRoute("Pages", "Store", "/Store/Page{listPage}", new {  Controller = "Home", Action = "Index", listPage = 1 });
+app.MapAreaControllerRoute("Categories", "Store", "/Store/{gameCategory}", new { Controller = "Home", Action = "Index" });
+app.MapAreaControllerRoute("CatPage", "Store", "/Store/{gameCategory}/Page{listPage}", new { Controller = "Home", Action = "Index", listPage = 1 });
 
 //if (app.Environment.IsDevelopment())
 //{

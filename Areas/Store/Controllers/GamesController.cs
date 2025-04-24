@@ -4,7 +4,7 @@ using PersonalWebsite.Models.StoreModels;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace PersonalWebsite.Controllers
+namespace PersonalWebsite.Areas.Store.Controllers
 {
     [Route("api/[controller]")]
     public class GamesController(StoreContext context) : ControllerBase
@@ -50,7 +50,7 @@ namespace PersonalWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                Category _category = categories.FirstOrDefault((c => c.CategoryID == target.CategoryId), categories.First(c => c.Name == "Other"));
+                Category _category = categories.FirstOrDefault(c => c.CategoryID == target.CategoryId, categories.First(c => c.Name == "Other"));
                 long _categoryId = _category.CategoryID;
                 Game game = new()
                 {
