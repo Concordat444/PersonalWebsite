@@ -6,18 +6,12 @@ using PersonalWebsite.Models.StoreModels.ViewModels;
 namespace PersonalWebsite.Areas.Store.Controllers
 {
     [Area("Store")]
-    public class HomeController : Controller
+    public class HomeController(StoreContext context) : Controller
     {
-        private StoreContext context;
-        private IEnumerable<Category> Categories => context.Categories;
+        private readonly StoreContext context = context;
         private IEnumerable<ProductOwner> ProductOwners => context.ProductOwners;
         private IEnumerable<Game> Games => context.Games;
         public int PageSize = 5;
-
-        public HomeController(StoreContext context)
-        {
-            this.context = context;
-        }
 
         public IActionResult Index(string? gameCategory, int listPage = 1)
         {

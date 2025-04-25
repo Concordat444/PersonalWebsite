@@ -1,0 +1,31 @@
+﻿@model SellerListViewModel
+
+<div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Username</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(ProductOwner seller in Model.ProductOwners ?? [])
+            {
+                <partial name="ProductOwnerSummary" model="seller" />
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a class="btn btn-sm btn-primary" asp-action="Create">Create</a>
+</div>
+<div class="text-center">
+    <div page-model="@Model.PagingInfo" page-action="Index"
+        page-classes-enabled="true" page-class="btn"
+        page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+        class="btn-group pull-right m-1"
+    ></div>
+</div>

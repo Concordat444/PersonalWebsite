@@ -31,7 +31,7 @@
                     @if
                     (
                         Context.Request.Cookies["User"] != null
-                        && Model.ProductOwner.Username == Context.Request.Cookies["User"]
+                        && Model.ProductOwner?.Username == Context.Request.Cookies["User"]
                     )
                     {
                         <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-sm btn-warning">Edit</a>
