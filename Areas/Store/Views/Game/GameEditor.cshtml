@@ -1,0 +1,119 @@
+﻿@model GameViewModel
+@using System.Text.Json
+
+<script>
+    const publishers = @Html.Raw(JsonSerializer.Serialize(Model.Publishers))
+</script>
+
+<partial name="_ValidationScriptsPartial" />
+
+<form asp-action="@Model?.Action" method="post">
+    <div class="form-group" hidden="@Model?.Action == " Create"">
+        <label asp-for="Game.GameId"></label>
+        <input class="form-control" asp-for="Game.GameId" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Game.Name"></label>
+        <input class="form-control" asp-for="Game.Name" readonly="@Model?.ReadOnly" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Game.GameDescription"></label>
+        <input class="form-control" asp-for="Game.GameDescription" readonly="@Model?.ReadOnly" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Game.PublicationYear"></label>
+        <input class="form-control" asp-for="Game.PublicationYear" readonly="@Model?.ReadOnly" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Game.ImageLink"></label>
+        <input class="form-control" asp-for="Game.ImageLink" readonly="@Model?.ReadOnly" />
+    </div>
+    <div class="mb-1">
+        <label asp-for="Game.CategoryId">Category</label>
+        <select asp-for="Game.CategoryId" class="form-control"
+        disabled="@Model?.ReadOnly"
+        asp-items="@(new SelectList(Model?.Categories,"CategoryID", "Name"))">
+            <option value="" disabled selected>Select a Category</option>
+        </select>
+    </div>
+    <div id="Publishers">
+        <div class="mb-1">
+            <label>Publishers</label>
+            <div class="btn btn-primary btn-sm" onclick="addPublisher()">Add Publisher</div>
+        </div>
+        @for (int i = 0; i < Model?.Game.Publishers?.Count; i++)
+        {
+            <div class="mb-1" id="Publisher-@i">
+                <label hidden="true" asp-for="Game.Publishers.ElementAt(i).PublisherId"></label>
+                <select asp-for="Game.Publishers.ElementAt(i).PublisherId" class="form-control"
+                name="PublisherIds"
+                disabled="@Model?.ReadOnly"
+                asp-items="@(new SelectList(Model?.Publishers, "PublisherId", "PublisherName"))">
+                    <option value="" disabled selected>Select Publisher</option>
+                </select>
+                <button class="btn btn-sm btn-danger" onclick="removePublisher('Publisher-@i')">Delete</button>
+            </div>
+        }
+    </div>
+    @if (Model?.ShowAction == true)
+    {
+        <button class="btn btn-@Model?.Theme mt-2" type="submit">@Model?.Action</button>
+    }
+    <a class="btn btn-secondary mt-2" asp-action="Index">Back</a>
+</form>
+
+<script>
+
+</script>
+
+@section Scripts
+{
+
+
+    <script>
+        function removePublisher(entry)
+        {
+            document.querySelector(`#${entry}`).remove();
+        }
+    </script>
+    <script>
+        let publisherCount = 0;
+
+        function addPublisher()
+        {
+            const publisherDiv = document.createElement('div');
+            publisherDiv.id = `NewPublisher-${publisherCount}`;
+            publisherDiv.classList.add("mb-1")
+
+            const publisherSelect = document.createElement('select');
+            publisherSelect.name = "PublisherIds";
+            publisherSelect.classList.add('form-control')
+
+            const defaultOption = document.createElement('option');
+            defaultOption.value = "";
+            defaultOption.text = "Select Publisher";
+            defaultOption.selected = true;
+            defaultOption.disabled = true;
+
+            const deleteButton = document.createElement("div");
+            deleteButton.id = `${publisherDiv.id}-delete`;
+            deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
+            deleteButton.textContent = "Delete";
+
+            publisherSelect.appendChild(defaultOption);
+            publishers.forEach(publisher =>
+            {
+                const option = document.createElement('option');
+                option.value = publisher.PublisherId;
+                option.text = publisher.PublisherName;
+                publisherSelect.appendChild(option);
+            })
+            publisherDiv.appendChild(publisherSelect);
+            publisherDiv.appendChild(deleteButton);
+            document.getElementById('Publishers').appendChild(publisherDiv);
+            deleteButton.addEventListener("click",() => removePublisher(publisherDiv.id));
+            publisherCount += 1;
+        }
+    </script>
+
+}
