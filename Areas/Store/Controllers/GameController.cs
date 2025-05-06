@@ -10,7 +10,7 @@ namespace PersonalWebsite.Areas.Store.Controllers
     {
         private readonly StoreContext Context = context;
         private IEnumerable<Category> Categories => Context.Categories;
-        private List<Publisher> Publishers => Context.Publisher.ToList();
+        private List<Publisher> Publishers => [.. Context.Publisher];
         public int PageSize = 10;
 
         public IActionResult Index(int listPage)
@@ -78,6 +78,41 @@ namespace PersonalWebsite.Areas.Store.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View("GameEditor", GameViewModelFactory.Edit(game, Categories, Publishers));
+        }
+
+        public IActionResult Create()
+        {
+            return View("GameEditor", GameViewModelFactory.Create(Categories, Publishers));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Game game, List<long> PublisherIds)
+        {
+            Game Game = game;
+            Game.Publishers = await Context.Publisher.Where(x => PublisherIds.Contains(x.PublisherId)).ToListAsync();
+            if(ModelState.IsValid)
+            {
+                Game.GameId = default;
+                Game.Category = default;
+                Context.Games.Add(Game);
+                await Context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View("GameEditor", GameViewModelFactory.Create(Categories, Publishers));
+        }
+
+        public async Task<IActionResult> Delete(long id)
+        {
+            Game? Game = await Context.Games.FirstOrDefaultAsync(x => x.GameId == id) ?? new() { Name = string.Empty };
+            return View("GameEditor", GameViewModelFactory.Delete(Game, Categories));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(Game game)
+        {
+            Context.Games.Remove(game);
+            await Context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

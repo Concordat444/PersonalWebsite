@@ -57,6 +57,7 @@ app.MapRazorPages();
 app.MapBlazorHub();
 app.MapControllers();
 
+app.MapAreaControllerRoute("PublisherPages", "Store", "/Store/Publishers/Page{listPage:int}", new { Controller = "Publisher", Action = "Index", listPage = 1 });
 app.MapAreaControllerRoute("SellerPages", "Store", "/Store/Sellers/Page{listPage:int}", new { Controller = "Seller", Action = "Index", listPage = 1 });
 app.MapAreaControllerRoute("GamePages", "Store", "/Store/Games/Page{listPage:int}", new { Controller = "Game", Action = "Index", listPage = 1 });
 app.MapAreaControllerRoute("Pages", "Store", "/Store/Page{listPage:int}", new {  Controller = "Home", Action = "Index", listPage = 1 });

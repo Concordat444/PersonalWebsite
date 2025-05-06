@@ -1,22 +1,22 @@
-﻿@model GameListViewModel
+﻿@model PublisherListViewModel
 @{
     Layout = "_SimpleLayout";
+    ViewData["Title"] = "Publishers";
 }
-
 <div>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <td>Game Id</td>
+                <td>Publisher Id</td>
                 <td>Name</td>
-                <td>Category</td>
+                <td># of Games</td>
                 <td></td>
             </tr>
         </thead>
         <tbody>
-            @foreach(Game game in Model.Games ?? [])
+            @foreach (PublisherDTO publisher in Model.Publishers ?? [])
             {
-                <partial name="GameSummary" model="game" />
+                <partial name="PublisherSummary" model="publisher" />
             }
         </tbody>
     </table>
