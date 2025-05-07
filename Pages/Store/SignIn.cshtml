@@ -2,6 +2,10 @@
 @model PersonalWebsite.Pages.Store.SignInModel
 <div class="container col-sm-6">
     <main class="form-signin w-100 m-auto">
+        @if(Model.message != null)
+        {
+            <p class="text-danger">@Model.message</p>
+        }
         @if(Model.CookiesActive ?? false)
         {
             <form method="post">

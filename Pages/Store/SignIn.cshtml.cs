@@ -7,8 +7,10 @@ namespace PersonalWebsite.Pages.Store
     public class SignInModel : PageModel
     {
         public string? ReturnUrl { get; set; } = "/Store";
+        [TempData]
+        public string? message { get; set; }
         public bool? CookiesActive { get; set; }
-        public void OnGet(string returnUrl)
+        public void OnGet(string? returnUrl, string? message)
         {
             ReturnUrl = returnUrl;
             CookiesActive = Request.Cookies[".AspNet.Consent"] == "yes";
