@@ -1,0 +1,10 @@
+﻿<vc:user-bar />
+
+<div class="d-grid gap-2">
+    <a class="btn btn-sm @("Game" == ViewBag.SelectedRoute ? "btn-primary" : "btn-outline-secondary")"
+        asp-route="GamePages" asp-route-listPage="1">Games</a>
+    <a class="btn btn-sm @("Publisher" == ViewBag.SelectedRoute ? "btn-primary" : "btn-outline-secondary")"
+       asp-route="PublisherPages" asp-route-listPage="1">Publisher</a>
+    <a class="btn btn-sm @("Seller" == ViewBag.SelectedRoute ? "btn-primary" : "btn-outline-secondary")"
+        asp-route="SellerPages" asp-route-listPage="1">Seller</a>
+</div>
