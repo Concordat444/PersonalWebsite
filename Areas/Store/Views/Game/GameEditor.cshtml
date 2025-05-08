@@ -1,6 +1,11 @@
 ﻿@model GameViewModel
 @using System.Text.Json
 
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = $"{Model.Game.Name}";
+}
+
 <script>
     const publishers = @Html.Raw(JsonSerializer.Serialize(Model.Publishers))
 </script>

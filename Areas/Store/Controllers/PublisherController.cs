@@ -12,16 +12,10 @@ namespace PersonalWebsite.Areas.Store.Controllers
     {
         private StoreContext Context = context;
         public int PageSize = 10;
-        private (bool valid, string? message) AuthorizedUser => CookieAuthorization.AuthorizedAccount(HttpContext.Request.Cookies["User"], null);
 
 
         public async Task<IActionResult> Index(int listPage)
         {
-            if (!AuthorizedUser.valid)
-            {
-                TempData["message"] = AuthorizedUser.message;
-                return RedirectToPage("/Store/SignIn");
-            }
             List<Publisher> publisherList = await  Context.Publisher.Include(x => x.Games).OrderBy(x => x.PublisherId).Skip((listPage - 1) * PageSize).Take(PageSize).ToListAsync();
             List<PublisherDTO> DTOs = publisherList.Select(publisher => new PublisherDTO() 
             {

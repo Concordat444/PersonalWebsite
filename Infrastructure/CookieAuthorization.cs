@@ -14,7 +14,7 @@ namespace PersonalWebsite.Infrastructure
             List<string> users = valid ?? ["admin"];
             return users.Contains(username) 
                 ? (true, null) 
-                : (false, $"The current user, {username}, is not authorized to view this page. To view this page, please sign in as \"admin\".");
+                : (false, $"The current user, \"{username}\", is not authorized to view this page. To view this page, please sign in as \"admin\".");
         }
 
         public static IActionResult RedirectToSignIn(HttpContext context, string? message)

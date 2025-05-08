@@ -2,9 +2,9 @@
 @model PersonalWebsite.Pages.Store.SignInModel
 <div class="container col-sm-6">
     <main class="form-signin w-100 m-auto">
-        @if(Model.message != null)
+        @if(Model.RedirectMessage != null)
         {
-            <p class="text-danger">@Model.message</p>
+            <p class="text-danger">@Model.RedirectMessage</p>
         }
         @if(Model.CookiesActive ?? false)
         {

@@ -9,9 +9,15 @@ namespace PersonalWebsite.Pages.Store
         public string? ReturnUrl { get; set; } = "/Store";
         [TempData]
         public string? message { get; set; }
+        public string? RedirectMessage { get; set; }
         public bool? CookiesActive { get; set; }
-        public void OnGet(string? returnUrl, string? message)
+        public void OnGet(string? returnUrl)
         {
+            if(Request.Cookies.TryGetValue("RedirectMessage", out var redirectMessage))
+            {
+                RedirectMessage = redirectMessage;
+                Response.Cookies.Delete("RedirectMessage");
+            }
             ReturnUrl = returnUrl;
             CookiesActive = Request.Cookies[".AspNet.Consent"] == "yes";
         }

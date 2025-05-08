@@ -3,6 +3,7 @@ using PersonalWebsite.Models;
 using Microsoft.AspNetCore.Identity;
 using PersonalWebsite.Models.StoreModels;
 using Microsoft.AspNetCore.Mvc;
+using PersonalWebsite.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseMiddleware<CookieAuthorizationMiddleware>();
 app.UseCookiePolicy();
 app.UseRouting();
 

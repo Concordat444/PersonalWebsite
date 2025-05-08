@@ -13,15 +13,9 @@ namespace PersonalWebsite.Areas.Store.Controllers
         private IEnumerable<Category> Categories => Context.Categories;
         private List<Publisher> Publishers => [.. Context.Publisher];
         public int PageSize = 10;
-        private (bool valid, string? message) AuthorizedUser => CookieAuthorization.AuthorizedAccount(HttpContext.Request.Cookies["User"], null);
 
         public IActionResult Index(int listPage)
         {
-            if (!AuthorizedUser.valid)
-            {
-                TempData["message"] = AuthorizedUser.message;
-                return RedirectToPage("/Store/SignIn");
-            }
             return View(new GameListViewModel()
             {
                 Games = Context.Games.Include(g => g.Category)
