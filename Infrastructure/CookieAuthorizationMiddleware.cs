@@ -10,7 +10,7 @@ namespace PersonalWebsite.Infrastructure
         public async Task InvokeAsync(HttpContext context)
         {
             string path = context.Request.Path.Value ?? "/";
-
+            
             if (path.StartsWith("/_blazor") ||
                 path.EndsWith(".dll") || path.EndsWith(".blat") ||
                 path.EndsWith(".js") || path.EndsWith(".css") ||
@@ -27,6 +27,13 @@ namespace PersonalWebsite.Infrastructure
                 if(!Authorized.Item1)
                 {
                     context.Response.Cookies.Append("RedirectMessage", Authorized.Item2!, new CookieOptions
+                    {
+                        Path = "/Store/SignIn",
+                        MaxAge = TimeSpan.FromMinutes(1),
+                        HttpOnly = true
+                    });
+
+                    context.Response.Cookies.Append("ReturnUrl", path, new CookieOptions
                     {
                         Path = "/Store/SignIn",
                         MaxAge = TimeSpan.FromMinutes(1),

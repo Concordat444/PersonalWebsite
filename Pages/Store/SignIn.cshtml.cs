@@ -11,12 +11,17 @@ namespace PersonalWebsite.Pages.Store
         public string? message { get; set; }
         public string? RedirectMessage { get; set; }
         public bool? CookiesActive { get; set; }
-        public void OnGet(string? returnUrl)
+        public void OnGet()
         {
             if(Request.Cookies.TryGetValue("RedirectMessage", out var redirectMessage))
             {
                 RedirectMessage = redirectMessage;
                 Response.Cookies.Delete("RedirectMessage");
+            }
+            if(Request.Cookies.TryGetValue("ReturnUrl", out var returnUrl))
+            {
+                RedirectMessage = redirectMessage;
+                Response.Cookies.Delete("ReturnUrl");
             }
             ReturnUrl = returnUrl;
             CookiesActive = Request.Cookies[".AspNet.Consent"] == "yes";
@@ -25,10 +30,9 @@ namespace PersonalWebsite.Pages.Store
         public  IActionResult OnPost() 
         {
             string? Username = Request.Form["Username"] == "" ? "Guest" : Request.Form["Username"];
+            string returnUrl = Request.Form["returnUrl"].ToString() ?? "/Store";
             Response.Cookies.Append("User", Username!, new CookieOptions { MaxAge = TimeSpan.FromDays(2) });
-            return ReturnUrl == null
-            ? RedirectToRoute("Pages")
-            : Redirect(ReturnUrl);
+            return Redirect(returnUrl);
         }
 
         public IActionResult OnGetAllow()

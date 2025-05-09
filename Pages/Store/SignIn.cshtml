@@ -1,4 +1,4 @@
-﻿@page "{ReturnUrl?}"
+﻿@page
 @model PersonalWebsite.Pages.Store.SignInModel
 <div class="container col-sm-6">
     <main class="form-signin w-100 m-auto">
@@ -9,6 +9,7 @@
         @if(Model.CookiesActive ?? false)
         {
             <form method="post">
+                <input type="hidden" value="@(Model.ReturnUrl ?? "/Store")" name="returnUrl" />
                 <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
                 <div class="form-floating">
