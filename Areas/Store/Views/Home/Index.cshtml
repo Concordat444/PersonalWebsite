@@ -1,5 +1,10 @@
 ﻿@model StoreListViewModel
 
+@if (TempData["Message"] != null)
+{
+    <p class="text-@TempData["MessageStyle"]">@TempData["Message"]</p>
+}
+
 @foreach (Product product in Model.Products ?? Enumerable.Empty<Product>())
 {
     <partial name="ProductSummary" model="product" />

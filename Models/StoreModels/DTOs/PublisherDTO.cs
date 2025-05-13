@@ -3,7 +3,7 @@
     public class PublisherDTO
     {
         public long? PublisherId { get; set; }
-        public string? PublisherName { get; set; }
+        public required string PublisherName { get; set; }
         public int? GameCount { get; set; }
         public Dictionary<long, string>? GamesDict { get; set; }
     }

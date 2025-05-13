@@ -3,6 +3,13 @@
     Layout = "_AdminLayout";
     ViewData["Title"] = "Publishers";
 }
+
+
+@if (TempData["Message"] != null)
+{
+    <p class="text-@TempData["MessageStyle"]">@TempData["Message"]</p>
+}
+
 <div>
     <table class="table table-bordered table-striped">
         <thead>

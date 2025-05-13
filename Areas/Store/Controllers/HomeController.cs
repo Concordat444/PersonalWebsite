@@ -12,6 +12,7 @@ namespace PersonalWebsite.Areas.Store.Controllers
         private IEnumerable<ProductOwner> ProductOwners => context.ProductOwners;
         private IEnumerable<Game> Games => context.Games;
         public int PageSize = 5;
+        int ProtectedEntries { get; } = 13;
 
         public IActionResult Index(string? gameCategory, int listPage = 1)
         {
@@ -91,6 +92,15 @@ namespace PersonalWebsite.Areas.Store.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (product.ProductId <= ProtectedEntries)
+                {
+                    string message =
+                        $"The original {ProtectedEntries} entries are for demonstration purposes and should not be modified. To test CRUD features, please create a new entry to work on.";
+                    TempData["Message"] = message;
+                    TempData["MessageStyle"] = "info";
+
+                    return RedirectToRoute("Pages");
+                }
                 product.Game = default;
                 product.ProductOwner = default;
                 context.Products.Update(product);
@@ -114,6 +124,16 @@ namespace PersonalWebsite.Areas.Store.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Product product)
         {
+            if (product.ProductId <= ProtectedEntries)
+            {
+                string message =
+                    $"The original {ProtectedEntries} entries are for demonstration purposes and should not be modified. To test CRUD features, please create a new entry to work on.";
+                TempData["Message"] = message;
+                TempData["MessageStyle"] = "info";
+
+                return RedirectToRoute("Pages");
+            }
+
             context.Products.Remove(product);
             await context.SaveChangesAsync();
             return RedirectToRoute("Pages");

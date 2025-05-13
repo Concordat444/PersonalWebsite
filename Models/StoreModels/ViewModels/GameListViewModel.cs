@@ -4,5 +4,6 @@
     {
         public IEnumerable<Game> Games { get; set; } = [];
         public PagingInfo PagingInfo { get; set; } = new();
+        public string? Message { get; set; }
     }
 }

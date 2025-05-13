@@ -4,6 +4,8 @@
     ViewData["Title"] = "Games";
 }
 
+<p class="text-info">@Model?.Message</p>
+
 <div>
     <table class="table table-bordered table-striped">
         <thead>
@@ -15,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(Game game in Model.Games ?? [])
+            @foreach(Game game in Model?.Games ?? [])
             {
                 <partial name="GameSummary" model="game" />
             }
@@ -26,7 +28,7 @@
     <a class="btn btn-sm btn-primary" asp-action="Create">Create</a>
 </div>
 <div class="text-center">
-    <div page-model="@Model.PagingInfo" page-action="Index"
+    <div page-model="@Model?.PagingInfo" page-action="Index"
          page-classes-enabled="true" page-class="btn"
          page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
          class="btn-group pull-right m-1">

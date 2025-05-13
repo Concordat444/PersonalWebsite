@@ -11,7 +11,7 @@ namespace PersonalWebsite.Areas.Store.Controllers
     {
         private readonly StoreContext Context = context;
         public int PageSize = 10;
-
+        int ProtectedEntries { get; } = 2;
 
         public IActionResult Index(int listPage)
         {
@@ -64,6 +64,14 @@ namespace PersonalWebsite.Areas.Store.Controllers
         {
             if(ModelState.IsValid)
             {
+                if(productOwner.ProductOwnerId <= ProtectedEntries)
+                {
+                    string message =
+                        $"The original {ProtectedEntries} entries are for demonstration purposes and should not be modified. To test CRUD features, please create a new entry to work on.";
+                    TempData["Message"] = message;
+                    return RedirectToAction(nameof(Index));
+                }
+
                 productOwner.Products = default;
                 Context.ProductOwners.Update(productOwner);
                 await Context.SaveChangesAsync();
@@ -81,6 +89,14 @@ namespace PersonalWebsite.Areas.Store.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(ProductOwner productOwner)
         {
+            if (productOwner.ProductOwnerId <= ProtectedEntries)
+            {
+                string message =
+                    $"The original {ProtectedEntries} entries are for demonstration purposes and should not be modified. To test CRUD features, please create a new entry to work on.";
+                TempData["Message"] = message;
+                return RedirectToAction(nameof(Index));
+            }
+
             Context.ProductOwners.Remove(productOwner);
             await Context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

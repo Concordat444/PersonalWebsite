@@ -1,0 +1,22 @@
+﻿@model PublisherViewModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<partial name="_ValidationScriptsPartial" />
+
+<form asp-action="@Model?.Action" method="post">
+    <div class="form-group" hidden="@(Model?.Action == "Create")">
+        <label asp-for="Publisher.PublisherId"></label>
+        <input asp-for="Publisher.PublisherId" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Publisher.PublisherName"></label>
+        <input class="form-control" asp-for="Publisher.PublisherName" readonly="@Model?.ReadOnly" />
+    </div>
+    @if(Model?.ShowAction == true)
+    {
+        <button class="btn btn-@Model?.Theme mt-2" type="submit">@Model?.Action</button>
+    }
+    <a class="btn btn-secondary mt-2" asp-action="Index">Back</a>
+</form>

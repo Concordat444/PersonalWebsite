@@ -13,6 +13,7 @@ namespace PersonalWebsite.Areas.Store.Controllers
         private IEnumerable<Category> Categories => Context.Categories;
         private List<Publisher> Publishers => [.. Context.Publisher];
         public int PageSize = 10;
+        int ProtectedEntries { get; } = 13;
 
         public IActionResult Index(int listPage)
         {
@@ -46,8 +47,28 @@ namespace PersonalWebsite.Areas.Store.Controllers
         public async Task<IActionResult> Edit(Game game, List<long> PublisherIds)
         {
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
+                if (game.GameId <= ProtectedEntries)
+                {
+                    string message =
+                        $"The original {ProtectedEntries} entries are for demonstration purposes and should not be modified. To test CRUD features, please create a new entry to work on.";
+                    return View("Index", new GameListViewModel()
+                    {
+                        Games = Context.Games.Include(g => g.Category)
+                            .OrderBy(g => g.GameId)
+                            .Take(PageSize),
+                        PagingInfo = new()
+                        {
+                            CurrentPage = 1,
+                            ItemsPerPage = PageSize,
+                            TotalItems = Context.Games.Count()
+                        },
+                        Message = message
+                    });
+                }
+
+
                 Game? Game = await Context.Games.Include(x => x.Publishers).FirstOrDefaultAsync(x => x.GameId == game.GameId);
                 if(Game == null)
                 {
@@ -111,6 +132,24 @@ namespace PersonalWebsite.Areas.Store.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Game game)
         {
+            if (game.GameId <= ProtectedEntries)
+            {
+                string message =
+                    $"The original {ProtectedEntries} entries are for demonstration purposes and should not be modified. To test CRUD features, please create a new entry to work on.";
+                return View("Index", new GameListViewModel()
+                {
+                    Games = Context.Games.Include(g => g.Category)
+                        .OrderBy(g => g.GameId)
+                        .Take(PageSize),
+                    PagingInfo = new()
+                    {
+                        CurrentPage = 1,
+                        ItemsPerPage = PageSize,
+                        TotalItems = Context.Games.Count()
+                    },
+                    Message = message
+                });
+            }
             Context.Games.Remove(game);
             await Context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

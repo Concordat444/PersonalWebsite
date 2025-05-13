@@ -5,6 +5,11 @@
     ViewData["Title"] = "Sellers";
 }
 
+@if(TempData["Message"] != null)
+{
+    <p class="text-info">@TempData["Message"]</p>
+}
+
 <div>
     <table class="table table-bordered table-striped">
         <thead>
