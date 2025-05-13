@@ -3,6 +3,7 @@ using PersonalWebsite.Models;
 using Microsoft.AspNetCore.Identity;
 using PersonalWebsite.Models.StoreModels;
 using Microsoft.AspNetCore.Mvc;
+using PersonalWebsite.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseMiddleware<CookieAuthorizationMiddleware>();
 app.UseCookiePolicy();
 app.UseRouting();
 
@@ -56,10 +58,14 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.MapBlazorHub();
 app.MapControllers();
-app.MapControllerRoute("Store", "{controller=Store}/{action=Index}");
-app.MapControllerRoute("Pages", "Store/Page{listPage}", new { Controller = "Store", Action = "Index", listPage = 1 });
-app.MapControllerRoute("Categories", "Store/{gameCategory}", new { Controller = "Store", Action = "Index" });
-app.MapControllerRoute("CatPage", "Store/{gameCategory}/Page{listPage}", new { Controller = "Store", Action = "Index", listPage = 1 });
+
+app.MapAreaControllerRoute("PublisherPages", "Store", "/Store/Publishers/Page{listPage:int}", new { Controller = "Publisher", Action = "Index", listPage = 1 });
+app.MapAreaControllerRoute("SellerPages", "Store", "/Store/Sellers/Page{listPage:int}", new { Controller = "Seller", Action = "Index", listPage = 1 });
+app.MapAreaControllerRoute("GamePages", "Store", "/Store/Games/Page{listPage:int}", new { Controller = "Game", Action = "Index", listPage = 1 });
+app.MapAreaControllerRoute("Pages", "Store", "/Store/Page{listPage:int}", new {  Controller = "Home", Action = "Index", listPage = 1 });
+app.MapAreaControllerRoute("Categories", "Store", "/Store/{gameCategory}", new { Controller = "Home", Action = "Index" });
+app.MapAreaControllerRoute("CatPage", "Store", "/Store/{gameCategory}/Page{listPage:int}", new { Controller = "Home", Action = "Index", listPage = 1 });
+app.MapControllerRoute("StoreArea", "{area:exists}/{controller=Home}/{action=Index}");
 
 //if (app.Environment.IsDevelopment())
 //{

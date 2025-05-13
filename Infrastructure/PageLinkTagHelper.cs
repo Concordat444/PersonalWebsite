@@ -41,9 +41,10 @@ namespace PersonalWebsite.Infrastructure
                 {
                     TagBuilder tag = new TagBuilder("a");
                     PageUrlValues["listPage"] = i;
-                    tag.Attributes["href"] = (PageUrlValues["gameCategory"] == null) 
-                        ? urlHelper.RouteUrl("Pages", PageUrlValues)
-                        : urlHelper.RouteUrl("CatPage", PageUrlValues);
+                    //tag.Attributes["href"] = (PageUrlValues["gameCategory"] == null) 
+                    //    ? urlHelper.RouteUrl("Pages", PageUrlValues)
+                    //    : urlHelper.RouteUrl("CatPage", PageUrlValues);
+                    tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
                     if(PageClassesEnabled)
                     {
                         tag.AddCssClass(PageClass);

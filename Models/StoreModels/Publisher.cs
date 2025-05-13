@@ -8,7 +8,7 @@ namespace PersonalWebsite.Models.StoreModels
         public long PublisherId { get; set; }
         public string PublisherName { get; set; } = string.Empty;
 
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
         public List<Game>? Games { get; set; }
 
         //public List<PublisherGame> PublisherGames { get; set; } = [];

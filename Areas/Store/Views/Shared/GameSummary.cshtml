@@ -1,0 +1,12 @@
+﻿@model Game
+
+<tr class="table table-bordered table-striped">
+    <td>@Model.GameId</td>
+    <td>@Model.Name</td>
+    <td>@(Model.Category?.Name ?? "Other")</td>
+    <td class="text-center">
+        <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@Model.GameId">Details</a>
+        <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@Model.GameId">Edit</a>
+        <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@Model.GameId">Delete</a>
+    </td>
+</tr>

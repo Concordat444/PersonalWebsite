@@ -1,0 +1,40 @@
+﻿@model SellerViewModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<partial name="_ValidationScriptsPartial" />
+
+<form asp-action="@Model?.Action" method="post">
+    <div class="form-group" hidden="@Model?.Action == "Create"">
+        <label asp-for="ProductOwner.ProductOwnerId"></label>
+        <input class="form-control" asp-for="ProductOwner.ProductOwnerId" readonly />
+    </div>
+    <div class="row d-flex">
+        <div class="col-2">
+            <label asp-for="ProductOwner.FirstName">First Name</label>
+            <input class="form-control" asp-for="ProductOwner.FirstName" readonly="@Model?.ReadOnly" />
+        </div>
+        <div class="col-2">
+            <label asp-for="ProductOwner.LastName">Last Name</label>
+            <input class="form-control" asp-for="ProductOwner.LastName" readonly="@Model?.ReadOnly" />
+        </div>
+    </div>
+    <div>
+        <label asp-for="ProductOwner.Username">Username</label>
+        <input class="form-control" asp-for="ProductOwner.Username" readonly="@(Model?.Action != "Create")" />
+    </div>
+    <div>
+        <label asp-for="ProductOwner.EMail">Email</label>
+        <input class="form-control" asp-for="ProductOwner.EMail" readonly="@Model?.ReadOnly" />
+    </div>
+    <div>
+        <label asp-for="ProductOwner.City"></label>
+        <input class="form-control" asp-for="ProductOwner.City" readonly="@Model?.ReadOnly" />
+    </div>
+    @if(Model?.ShowAction == true)
+    {
+        <button class="btn btn-@Model?.Theme mt-2" type="submit">@Model?.Action</button>
+    }
+    <a class="btn btn-secondary mt-2" asp-action="Index">Back</a>
+</form>

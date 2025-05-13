@@ -1,0 +1,40 @@
+﻿@model PublisherListViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Publishers";
+}
+
+
+@if (TempData["Message"] != null)
+{
+    <p class="text-@TempData["MessageStyle"]">@TempData["Message"]</p>
+}
+
+<div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>Publisher Id</td>
+                <td>Name</td>
+                <td># of Games</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (PublisherDTO publisher in Model.Publishers ?? [])
+            {
+                <partial name="PublisherSummary" model="publisher" />
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a class="btn btn-sm btn-primary" asp-action="Create">Create</a>
+</div>
+<div class="text-center">
+    <div page-model="@Model.PagingInfo" page-action="Index"
+         page-classes-enabled="true" page-class="btn"
+         page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+         class="btn-group pull-right m-1">
+    </div>
+</div>
