@@ -2,9 +2,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PersonalWebsite.Models.StoreModels;
 
 #nullable disable
@@ -12,8 +12,8 @@ using PersonalWebsite.Models.StoreModels;
 namespace PersonalWebsite.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20250411152804_CorrectedSchema")]
-    partial class CorrectedSchema
+    [Migration("20250526172540_PostgresInitial")]
+    partial class PostgresInitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,9 +21,9 @@ namespace PersonalWebsite.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.14")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("GamePublisher", b =>
                 {
@@ -46,11 +46,11 @@ namespace PersonalWebsite.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("CategoryID"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("CategoryID"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("CategoryID");
 
@@ -63,25 +63,25 @@ namespace PersonalWebsite.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("GameId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("GameId"));
 
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("GameDescription")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ImageLink")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("PublicationYear")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("GameId");
 
@@ -96,71 +96,71 @@ namespace PersonalWebsite.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ProductId"));
-
-                    b.Property<long>("CategoryId")
-                        .HasColumnType("bigint");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ProductId"));
 
                     b.Property<long?>("GameId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("OwnerId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(8, 2)");
 
-                    b.Property<long?>("ProductOwnerOwnerId")
+                    b.Property<long?>("ProductOwnerId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.Property<string>("SellerDescription")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("ProductId");
 
-                    b.HasIndex("CategoryId");
-
                     b.HasIndex("GameId");
 
-                    b.HasIndex("ProductOwnerOwnerId");
+                    b.HasIndex("ProductOwnerId");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("PersonalWebsite.Models.StoreModels.ProductOwner", b =>
                 {
-                    b.Property<long>("OwnerId")
+                    b.Property<long>("ProductOwnerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("OwnerId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ProductOwnerId"));
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("EMail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
-                    b.HasKey("OwnerId");
+                    b.HasKey("ProductOwnerId");
+
+                    b.HasIndex("EMail")
+                        .IsUnique();
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("ProductOwners");
                 });
@@ -171,11 +171,11 @@ namespace PersonalWebsite.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("PublisherId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("PublisherId"));
 
                     b.Property<string>("PublisherName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("PublisherId");
 
@@ -210,21 +210,17 @@ namespace PersonalWebsite.Migrations
 
             modelBuilder.Entity("PersonalWebsite.Models.StoreModels.Product", b =>
                 {
-                    b.HasOne("PersonalWebsite.Models.StoreModels.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
+                    b.HasOne("PersonalWebsite.Models.StoreModels.Game", "Game")
+                        .WithMany("Products")
+                        .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PersonalWebsite.Models.StoreModels.Game", "Game")
-                        .WithMany("Products")
-                        .HasForeignKey("GameId");
-
                     b.HasOne("PersonalWebsite.Models.StoreModels.ProductOwner", "ProductOwner")
                         .WithMany("Products")
-                        .HasForeignKey("ProductOwnerOwnerId");
-
-                    b.Navigation("Category");
+                        .HasForeignKey("ProductOwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Game");
 

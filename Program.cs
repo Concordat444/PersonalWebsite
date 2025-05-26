@@ -4,24 +4,25 @@ using Microsoft.AspNetCore.Identity;
 using PersonalWebsite.Models.StoreModels;
 using Microsoft.AspNetCore.Mvc;
 using PersonalWebsite.Infrastructure;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string? connString = System.Environment.GetEnvironmentVariable("SQLCONNSTR_GameStoreDbConnection");
+string? connString = System.Environment.GetEnvironmentVariable("POSTGRESQLCONNSTR_PostgreDbConnection");
 string testConnString = builder.Configuration["SQLCONNSTR"]!;
 
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddDbContext<StoreContext>(options =>
     {
-        options.UseSqlServer(builder.Configuration["ConnectionStrings:DevGameConnection"]);
+        options.UseNpgsql(builder.Configuration["LOCALPOSTGRESCONNSTR"]);
         options.EnableSensitiveDataLogging(true);
     });
 } else
 {
     builder.Services.AddDbContext<StoreContext>(options =>
     {
-        options.UseSqlServer(connString);
+        options.UseNpgsql(connString);
     });
 }
 
